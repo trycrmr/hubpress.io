@@ -1,0 +1,2 @@
+= Installing Squid
+:hp-image: http://www.squid-cache.org/Images/img4.jpg
