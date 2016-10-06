@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Oct 2016 13:40:04 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Installing Squid on CentOS 7]]></title><description><![CDATA[<div class="sect1">
+<h2 id="_installing_a_href_http_www_squid_cache_org_squid_a_on_centos_7">Installing <a href="http://www.squid-cache.org/">Squid</a> on CentOS 7</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The following assumptions are made: You are able to edit text files in the terminal and yum is your package manager.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Installation</div>
+<ol class="arabic">
+<li>
+<p>yum install squid</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Installs to /etc/squid</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Configuration</div>
+<ol class="arabic">
+<li>
+<p>Optional, remove comments from squid.conf, <code>grep -Eiv '(<sup>#|</sup>$)' /etc/squid/squid.conf &gt; /etc/squid/squid.conf.new</code></p>
+</li>
+<li>
+<p>Set <code>http_port</code> from <code>3128</code> to <code>80 accel allow-direct</code>. This will allow Squid to proxy all HTTP traffic.</p>
+</li>
+<li>
+<p>Add the following rules. They will allow Squid to process and reply to any http traffic it receives:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>http_access allow all</code></p>
+</li>
+<li>
+<p><code>http_reply_access allow all</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For all the ways Squid can be configured, take advantage of <a href="http://wiki.squid-cache.org/">Squid&#8217;s Wiki</a> and their <a href="http://www.squid-cache.org/Doc/">website&#8217;s documentation</a> (particularly their <a href="http://www.squid-cache.org/Doc/config/">list of Squid configs</a>).
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Starting</div>
+<ol class="arabic">
+<li>
+<p>Enable Squid with systemctl: <code>systemctl enable squid</code></p>
+</li>
+<li>
+<p>Start Squid: <code>systemctl start squid</code></p>
+</li>
+<li>
+<p>Validate Squid is running by checking the processes <code>ps -ax | grep "squid"</code></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Changes to the squid.conf are implemented by restarting Squid ( <code>systemctl restart squid</code> )
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Firefox 47.x can be configured to point all traffic to a proxy server under Preferences &gt; Advanced &gt; Network &gt; Connection. Can be useful for testing Squid.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_optional_configurations">Optional Configurations</h3>
+<div class="olist arabic">
+<div class="title">Caching</div>
+<ol class="arabic">
+<li>
+<p>Uncomment <code>cache_dir ufs /var/spool/squid 100 16 256</code></p>
+</li>
+<li>
+<p>Comment out all the <code>refresh_pattern</code> configs except <code>refresh_pattern .</code></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Validate Squid is properly proxying requests by tailing the access logs on the Squid server <code>tail -f /var/logs/squid/access.log</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If testing using Firefox 47.x by disabling the local browser web cache by changing the amount of space allocated to the local web cache to 0mb at Preferences &gt; Advanced &gt; Network &gt; Cached Web Content
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Load Balancer</div>
+<ol class="arabic">
+<li>
+<p>Add the following configs to squid.conf, inserting the appropriate IP or Public DNS as necessary:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>http_port 80 accel act-as-origin [insert primary destination server IP or Public DNS]</code></p>
+</li>
+<li>
+<p><code>cache_peer [insert primary destination server IP or Public DNS] 80 0 no-query originserver round-robin</code></p>
+</li>
+<li>
+<p><code>cache_peer [insert secondary destination server IP or Public DNS] parent 80 0 no-query originserver round-robin</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test by navigating to Squid. You should see content from one of the two destination servers.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>]]></description><link>https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html</link><guid isPermaLink="true">https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html</guid><category><![CDATA[Squid]]></category><category><![CDATA[ CentOS 7]]></category><category><![CDATA[ Installation]]></category><category><![CDATA[ Configuration]]></category><dc:creator><![CDATA[Terry Creamer]]></dc:creator><pubDate>Tue, 04 Oct 2016 00:00:00 GMT</pubDate></item></channel></rss>
