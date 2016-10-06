@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Installing Squid on CentOS 7</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Installing Squid on CentOS 7">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Installing Squid on CentOS 7">
+    <meta property="og:description" content="">
+
+    <!-- <meta name="twitter:site" content="">
+
+<meta name="twitter:creator" content="">
+
+<meta name="google-site-verification" content="">
+
+<meta property="fb:admins" content="">
+ -->
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="//fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1475761204462"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1475761204462"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1475761204462"/>
+
+
+
+
+    <script type="text/javascript">
+      var ga_ua = 'UA-XXXXX-X';
+      
+      var disqus_shortname = 'example';
+      
+      var enable_pjax = true;
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1475761204462"></script>
+
+    <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="There and back again" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Installing Squid on CentOS 7" />
+    <meta property="og:description" content="Installing Squid on CentOS 7 The following assumptions are made: You are able to edit text files in the terminal and yum is your package manager. These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. Installation yum install squid Installs to /etc/squid" />
+    <meta property="og:url" content="https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html" />
+    <meta property="article:tag" content="Squid" />
+    <meta property="article:tag" content=" CentOS 7" />
+    <meta property="article:tag" content=" Installation" />
+    <meta property="article:tag" content=" Configuration" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Installing Squid on CentOS 7" />
+    <meta name="twitter:description" content="Installing Squid on CentOS 7 The following assumptions are made: You are able to edit text files in the terminal and yum is your package manager. These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. Installation yum install squid Installs to /etc/squid" />
+    <meta name="twitter:url" content="https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html" />
+    
+    <script type="application/ld+json">
+null
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="There and back again" href="https://trycrmr.github.io/hubpress.io/rss/" />
+  </head>
+  <body class="post-template tag-Squid tag-CentOS-7 tag-Installation tag-Configuration">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+    <nav tabindex="-1" class="drawer">
+      <div class="drawer-container">
+        <!--.drawer-search(role="search")-->
+        <ul role="navigation" class="drawer-list">
+          
+          <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io" data-pjax>
+              <i class="fa fa-home"></i>Home
+            </a>
+          </li>
+          <!-- <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io" title="There and back again" data-pjax>
+              <i class="fa fa-list-alt"></i>All posts
+            </a>
+          </li> -->
+          <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io/rss/">
+              <i class="fa fa-rss"></i>Subscribe to Feed
+            </a>
+          </li>
+          <li class="drawer-list-divider"></li>
+          <li class="drawer-list-item drawer-list-title">
+            Follow me
+          </li>
+          
+          
+          <li class="drawer-list-item">
+            <a href="https://twitter.com/trycrmr" title="Twitter" target="_blank">
+              <i class="fa fa-twitter"></i>Twitter
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://github.com/trycrmr" title="Github" target="_blank">
+              <i class="fa fa-github"></i>Github
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://www.facebook.com/TerenceCream" title="Facebook" target="_blank">
+              <i class="fa fa-facebook"></i>Facebook
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://www.linkedin.com/in/terencecreamer" title="LinkedIn" target="_blank">
+              <i class="fa fa-linkedin"></i>LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+<section class="wrapper wrapper-post">
+  <div class="wrapper-container">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-Squid tag-CentOS-7 tag-Installation tag-Configuration">
+        <section class="post-container">
+          <header class="post-header">
+            <ul class="post-meta-list">
+              <li class="post-meta-item">
+                <time datetime="2016-10-04" itemprop="datePublished">
+                  2 days ago
+                </time>
+              </li>
+                <li class="post-meta-item">
+                  <span class="tags"><i class="fa fa-tags"></i>
+                      <span>
+                      <a href="https://trycrmr.github.io/hubpress.io/tag/Squid/">Squid</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/CentOS-7/"> CentOS 7</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/Installation/"> Installation</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/Configuration/"> Configuration</a></span>
+                  </span>
+                </li>
+              <li class="post-meta-item">
+                <a href="#disqus_thread" data-disqus-identifier="">Comments</a>
+              </li>
+            </ul>
+            <h1 itemprop="name headline" class="post-title"><a href="https://trycrmr.github.io/hubpress.io/2016/10/04/Installing-Squid-on-CentOS-7.html" itemprop="url" data-pjax title="Installing Squid on CentOS 7">Installing Squid on CentOS 7</a></h1>
+            <!--h2 itemprop="about" class="post-subtitle"></h2-->
+          </header>
+          <aside class="post-side">
+            <div class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img src="https://avatars.githubusercontent.com/u/6002123?v&#x3D;3" alt="Terry Creamer">
+                </a>
+              <div class="post-author-info">
+                <a href="" class="post-author-name">
+                  Terry Creamer
+                </a>
+                <p class="post-author-bio"></p>
+              </div>
+            </div>
+          </aside>
+          <div itemprop="articleBody" class="post-body">
+            <div class="sect1">
+<h2 id="_installing_a_href_http_www_squid_cache_org_squid_a_on_centos_7">Installing <a href="http://www.squid-cache.org/">Squid</a> on CentOS 7</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The following assumptions are made: You are able to edit text files in the terminal and yum is your package manager.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Installation</div>
+<ol class="arabic">
+<li>
+<p>yum install squid</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Installs to /etc/squid</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Configuration</div>
+<ol class="arabic">
+<li>
+<p>Optional, remove comments from squid.conf, <code>grep -Eiv '(<sup>#|</sup>$)' /etc/squid/squid.conf &gt; /etc/squid/squid.conf.new</code></p>
+</li>
+<li>
+<p>Set <code>http_port</code> from <code>3128</code> to <code>80 accel allow-direct</code>. This will allow Squid to proxy all HTTP traffic.</p>
+</li>
+<li>
+<p>Add the following rules. They will allow Squid to process and reply to any http traffic it receives:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>http_access allow all</code></p>
+</li>
+<li>
+<p><code>http_reply_access allow all</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For all the ways Squid can be configured, take advantage of <a href="http://wiki.squid-cache.org/">Squid&#8217;s Wiki</a> and their <a href="http://www.squid-cache.org/Doc/">website&#8217;s documentation</a> (particularly their <a href="http://www.squid-cache.org/Doc/config/">list of Squid configs</a>).
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Starting</div>
+<ol class="arabic">
+<li>
+<p>Enable Squid with systemctl: <code>systemctl enable squid</code></p>
+</li>
+<li>
+<p>Start Squid: <code>systemctl start squid</code></p>
+</li>
+<li>
+<p>Validate Squid is running by checking the processes <code>ps -ax | grep "squid"</code></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Changes to the squid.conf are implemented by restarting Squid ( <code>systemctl restart squid</code> )
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Firefox 47.x can be configured to point all traffic to a proxy server under Preferences &gt; Advanced &gt; Network &gt; Connection. Can be useful for testing Squid.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_optional_configurations">Optional Configurations</h3>
+<div class="olist arabic">
+<div class="title">Caching</div>
+<ol class="arabic">
+<li>
+<p>Uncomment <code>cache_dir ufs /var/spool/squid 100 16 256</code></p>
+</li>
+<li>
+<p>Comment out all the <code>refresh_pattern</code> configs except <code>refresh_pattern .</code></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Validate Squid is properly proxying requests by tailing the access logs on the Squid server <code>tail -f /var/logs/squid/access.log</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If testing using Firefox 47.x by disabling the local browser web cache by changing the amount of space allocated to the local web cache to 0mb at Preferences &gt; Advanced &gt; Network &gt; Cached Web Content
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Load Balancer</div>
+<ol class="arabic">
+<li>
+<p>Add the following configs to squid.conf, inserting the appropriate IP or Public DNS as necessary:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>http_port 80 accel act-as-origin [insert primary destination server IP or Public DNS]</code></p>
+</li>
+<li>
+<p><code>cache_peer [insert primary destination server IP or Public DNS] 80 0 no-query originserver round-robin</code></p>
+</li>
+<li>
+<p><code>cache_peer [insert secondary destination server IP or Public DNS] parent 80 0 no-query originserver round-robin</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test by navigating to Squid. You should see content from one of the two destination servers.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+          </div>
+          <footer class="post-footer">
+            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img itemprop="image" src="https://avatars.githubusercontent.com/u/6002123?v&#x3D;3" alt="Terry Creamer">
+                </a>
+              <div class="post-author-info">
+                <h4 class="post-footer-heading">Written By</h4>
+                <a href="" itemprop="url" class="post-author-name">
+                  <span itemprop="name">Terry Creamer</span>
+                </a>
+                <p itemprop="description" class="post-author-bio"></p>
+                  <p class="post-author-location">Washington, D.C.</p>
+                <p class="post-info">
+                  <b class="post-info-title">Published on</b>
+                  <time class="post-date">October 04, 2016</time>
+                </p>
+              </div>
+            </div>
+            <div class="post-social">
+              <h4 class="post-footer-heading">Spread the word</h4>
+              <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+              <a href="#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+              <a href="#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+            </div>
+          </footer>
+        </section>
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+    </article>
+
+    <footer role="contentinfo" class="footer">
+      <p><small>Copyright &copy; <span itemprop="copyrightHolder">There and back again</span>. 2016. All Rights Reserved.</small></p>
+      <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+      <p><small>Adapted by <a href="https://twitter.com/mgreau">Maxime Gréau</a></small></p>
+      <p><small>Published with <a href="http://hubpress.io">HubPress</a></small></p>
+    </footer>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1475761204462"></script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-31386246-5', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>
