@@ -1,2 +1,51 @@
-= Installing Squid
-:hp-image:http://www.squid-cache.org/Images/img4.jpg
+= Installing Squid on CentOS 7
+//^
+
+== Installing link:http://www.squid-cache.org/[Squid] on CentOS 7
+:hp-tags: Squid, CentOS 7, Installation, Configuration
+CAUTION: The following assumptions are made: You are able to edit text files in the terminal and yum is your package manager.
+
+WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
+
+.Installation
+. yum install squid
+.. Installs to /etc/squid
+//^ 
+
+.Configuration
+. Optional, remove comments from squid.conf, `grep -Eiv '(^#|^$)' /etc/squid/squid.conf > /etc/squid/squid.conf.new`
+. Set `http_port` from `3128` to `80 accel allow-direct`. This will allow Squid to proxy all HTTP traffic.
+. Add the following rules. They will allow Squid to process and reply to any http traffic it receives:
+.. `http_access allow all`
+.. `http_reply_access allow all`
+
+//^ 
+
+TIP: For all the ways Squid can be configured, take advantage of link:http://wiki.squid-cache.org/[Squid's Wiki] and their link:http://www.squid-cache.org/Doc/[website's documentation] (particularly their link:http://www.squid-cache.org/Doc/config/[list of Squid configs]).
+
+.Starting
+. Enable Squid with systemctl: `systemctl enable squid`
+. Start Squid: `systemctl start squid`
+. Validate Squid is running by checking the processes `ps -ax | grep "squid"`
+//^ 
+
+NOTE: Changes to the squid.conf are implemented by restarting Squid ( `systemctl restart squid` )
+
+TIP: Firefox 47.x can be configured to point all traffic to a proxy server under Preferences > Advanced > Network > Connection. Can be useful for testing Squid.
+
+=== Optional Configurations
+
+.Caching
+. Uncomment `cache_dir ufs /var/spool/squid 100 16 256`
+. Comment out all the `refresh_pattern` configs except `refresh_pattern .`
+
+TIP: Validate Squid is properly proxying requests by tailing the access logs on the Squid server `tail -f /var/logs/squid/access.log`
+
+NOTE: If testing using Firefox 47.x by disabling the local browser web cache by changing the amount of space allocated to the local web cache to 0mb at Preferences > Advanced > Network > Cached Web Content
+
+.Load Balancer
+. Add the following configs to squid.conf, inserting the appropriate IP or Public DNS as necessary:
+.. `http_port 80 accel act-as-origin [insert primary destination server IP or Public DNS]`
+.. `cache_peer [insert primary destination server IP or Public DNS] 80 0 no-query originserver round-robin`
+.. `cache_peer [insert secondary destination server IP or Public DNS] parent 80 0 no-query originserver round-robin`
+. Test by navigating to Squid. You should see content from one of the two destination servers. 
