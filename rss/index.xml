@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Oct 2016 19:21:15 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock tip">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Oct 2016 19:30:04 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -40,8 +40,35 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </li>
 <li>
 <p>Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: <code>CALL spatial.procedures</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from <a href="https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java">the code</a> at this time. For example, the parameters for the <code>spatial.withinDistance</code> are listed in the code below (hint: <code>@Name</code>)</p>
 </li>
 </ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    @Procedure("spatial.withinDistance")
+    @PerformsWrites // TODO FIX
+    public Stream&lt;NodeDistanceResult&gt; findGeometriesWithinDistance(
+            @Name("layerName") String name,
+            @Name("coordinate") Object coordinate,
+            @Name("distanceInKm") double distanceInKm) {
+
+        Layer layer = getLayerOrThrow(name);
+        return GeoPipeline
+                .startNearestNeighborLatLonSearch(layer, toCoordinate(coordinate), distanceInKm)
+                .sort(DISTANCE)
+                .stream().map(r -&gt; {
+                    double distance = r.hasProperty(DISTANCE) ? ((Number) r.getProperty(DISTANCE)).doubleValue() : -1;
+                    return new NodeDistanceResult(r.getGeomNode(), distance);
+                });
+    }</pre>
+</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -72,6 +99,19 @@ To be continued&#8230;&#8203;
 </li>
 <li>
 <p>Prove on a larger dataset</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">NOTES</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://vimeo.com/89064528">0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial</a></p>
+</li>
+<li>
+<p>No documentation on</p>
 </li>
 </ul>
 </div>
