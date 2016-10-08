@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Setting up Neo4j for Spatial Queries</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Setting up Neo4j for Spatial Queries">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Setting up Neo4j for Spatial Queries">
+    <meta property="og:description" content="">
+
+    <!-- <meta name="twitter:site" content="">
+
+<meta name="twitter:creator" content="">
+
+<meta name="google-site-verification" content="">
+
+<meta property="fb:admins" content="">
+ -->
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="//fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1475955057559"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1475955057559"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1475955057559"/>
+
+
+
+
+    <script type="text/javascript">
+      var ga_ua = 'UA-XXXXX-X';
+      
+      var disqus_shortname = 'example';
+      
+      var enable_pjax = true;
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1475955057559"></script>
+
+    <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="There and back again" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Setting up Neo4j for Spatial Queries" />
+    <meta property="og:description" content="Here&amp;#8217;s an example application issuing spatial queries to Neo4j and the associated blog post. The following assumptions are made: You have a version of Neo4j 3.x installed. You are familiar with the Cypher Query Language (&quot;Ascii art for graph databases&quot;). Installation Create a plugins folder within your" />
+    <meta property="og:url" content="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
+    <meta property="article:tag" content="Neo4j" />
+    <meta property="article:tag" content=" neo4j-spatial" />
+    <meta property="article:tag" content=" Installation" />
+    <meta property="article:tag" content=" Configuration" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Setting up Neo4j for Spatial Queries" />
+    <meta name="twitter:description" content="Here&amp;#8217;s an example application issuing spatial queries to Neo4j and the associated blog post. The following assumptions are made: You have a version of Neo4j 3.x installed. You are familiar with the Cypher Query Language (&quot;Ascii art for graph databases&quot;). Installation Create a plugins folder within your" />
+    <meta name="twitter:url" content="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
+    
+    <script type="application/ld+json">
+null
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="There and back again" href="https://trycrmr.github.io/hubpress.io/rss/" />
+  </head>
+  <body class="post-template tag-Neo4j tag-neo4j-spatial tag-Installation tag-Configuration">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+    <nav tabindex="-1" class="drawer">
+      <div class="drawer-container">
+        <!--.drawer-search(role="search")-->
+        <ul role="navigation" class="drawer-list">
+          
+          <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io" data-pjax>
+              <i class="fa fa-home"></i>Home
+            </a>
+          </li>
+          <!-- <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io" title="There and back again" data-pjax>
+              <i class="fa fa-list-alt"></i>All posts
+            </a>
+          </li> -->
+          <li class="drawer-list-item">
+            <a href="https://trycrmr.github.io/hubpress.io/rss/">
+              <i class="fa fa-rss"></i>Subscribe to Feed
+            </a>
+          </li>
+          <li class="drawer-list-divider"></li>
+          <li class="drawer-list-item drawer-list-title">
+            Follow me
+          </li>
+          
+          
+          <li class="drawer-list-item">
+            <a href="https://twitter.com/trycrmr" title="Twitter" target="_blank">
+              <i class="fa fa-twitter"></i>Twitter
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://github.com/trycrmr" title="Github" target="_blank">
+              <i class="fa fa-github"></i>Github
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://www.facebook.com/TerenceCream" title="Facebook" target="_blank">
+              <i class="fa fa-facebook"></i>Facebook
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="https://www.linkedin.com/in/terencecreamer" title="LinkedIn" target="_blank">
+              <i class="fa fa-linkedin"></i>LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+<section class="wrapper wrapper-post">
+  <div class="wrapper-container">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-Neo4j tag-neo4j-spatial tag-Installation tag-Configuration">
+        <section class="post-container">
+          <header class="post-header">
+            <ul class="post-meta-list">
+              <li class="post-meta-item">
+                <time datetime="2016-10-08" itemprop="datePublished">
+                  16 hours ago
+                </time>
+              </li>
+                <li class="post-meta-item">
+                  <span class="tags"><i class="fa fa-tags"></i>
+                      <span>
+                      <a href="https://trycrmr.github.io/hubpress.io/tag/Neo4j/">Neo4j</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/neo4j-spatial/"> neo4j-spatial</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/Installation/"> Installation</a>, <a href="https://trycrmr.github.io/hubpress.io/tag/Configuration/"> Configuration</a></span>
+                  </span>
+                </li>
+              <li class="post-meta-item">
+                <a href="#disqus_thread" data-disqus-identifier="">Comments</a>
+              </li>
+            </ul>
+            <h1 itemprop="name headline" class="post-title"><a href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" itemprop="url" data-pjax title="Setting up Neo4j for Spatial Queries">Setting up Neo4j for Spatial Queries</a></h1>
+            <!--h2 itemprop="about" class="post-subtitle"></h2-->
+          </header>
+          <aside class="post-side">
+            <div class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img src="https://avatars.githubusercontent.com/u/6002123?v&#x3D;3" alt="Terry Creamer">
+                </a>
+              <div class="post-author-info">
+                <a href="" class="post-author-name">
+                  Terry Creamer
+                </a>
+                <p class="post-author-bio"></p>
+              </div>
+            </div>
+          </aside>
+          <div itemprop="articleBody" class="post-body">
+            <div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="http://legis-graph.github.io/legis-graph-spatial/">Here&#8217;s an example application</a> issuing spatial queries to Neo4j and the <a href="https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/">associated blog post</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The following assumptions are made: You have a version of <a href="https://neo4j.com/download/other-releases/">Neo4j 3.x</a> installed. You are familiar with <a href="http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started">the Cypher Query Language ("Ascii art for graph databases")</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Installation</div>
+<ol class="arabic">
+<li>
+<p>Create a plugins folder within your Neo4j database location. In my case this was
+<code>/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins</code>.</p>
+</li>
+<li>
+<p>Download the appropriate version of the <a href="https://github.com/neo4j-contrib/spatial">neo4j-spatial</a> plugin for your 3.x version of Neo4j. This is likely a zipped up .jar file.</p>
+</li>
+<li>
+<p>unzip the .jar file and put it in the plugins directory created earlier. The full path to my neo4j-spatial .jar file is <code>/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins/neo4j-spatial-0.19-neo4j-3.0.3-server-plugin.jar</code>.</p>
+</li>
+<li>
+<p>Restart your Neo4j server</p>
+</li>
+<li>
+<p>Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: <code>CALL spatial.procedures</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from <a href="https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java">the code</a> at this time. For example, the parameters for the <code>spatial.withinDistance</code> are listed in the code below (hint: <code>@Name</code>)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Procedure("spatial.withinDistance")
+    @PerformsWrites // TODO FIX
+    public Stream&lt;NodeDistanceResult&gt; findGeometriesWithinDistance(
+            @Name("layerName") String name,
+            @Name("coordinate") Object coordinate,
+            @Name("distanceInKm") double distanceInKm) {
+
+        Layer layer = getLayerOrThrow(name);
+        return GeoPipeline
+                .startNearestNeighborLatLonSearch(layer, toCoordinate(coordinate), distanceInKm)
+                .sort(DISTANCE)
+                .stream().map(r -&gt; {
+                    double distance = r.hasProperty(DISTANCE) ? ((Number) r.getProperty(DISTANCE)).doubleValue() : -1;
+                    return new NodeDistanceResult(r.getGeomNode(), distance);
+                });
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+To be continued&#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">TODO</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Create test data to prove spatial capabilities</p>
+</li>
+<li>
+<p>Issue a spatial cypher query on test data</p>
+</li>
+<li>
+<p>Incorporate into larger dataset</p>
+</li>
+<li>
+<p>Prove on a larger dataset</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">NOTES</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://vimeo.com/89064528">0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial</a></p>
+</li>
+<li>
+<p>No documentation on</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+          </div>
+          <footer class="post-footer">
+            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img itemprop="image" src="https://avatars.githubusercontent.com/u/6002123?v&#x3D;3" alt="Terry Creamer">
+                </a>
+              <div class="post-author-info">
+                <h4 class="post-footer-heading">Written By</h4>
+                <a href="" itemprop="url" class="post-author-name">
+                  <span itemprop="name">Terry Creamer</span>
+                </a>
+                <p itemprop="description" class="post-author-bio"></p>
+                  <p class="post-author-location">Washington, D.C.</p>
+                <p class="post-info">
+                  <b class="post-info-title">Published on</b>
+                  <time class="post-date">October 08, 2016</time>
+                </p>
+              </div>
+            </div>
+            <div class="post-social">
+              <h4 class="post-footer-heading">Spread the word</h4>
+              <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+              <a href="#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+              <a href="#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+            </div>
+          </footer>
+        </section>
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+    </article>
+
+    <footer role="contentinfo" class="footer">
+      <p><small>Copyright &copy; <span itemprop="copyrightHolder">There and back again</span>. 2016. All Rights Reserved.</small></p>
+      <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+      <p><small>Adapted by <a href="https://twitter.com/mgreau">Maxime Gréau</a></small></p>
+      <p><small>Published with <a href="http://hubpress.io">HubPress</a></small></p>
+    </footer>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1475955057559"></script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-31386246-5', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>
