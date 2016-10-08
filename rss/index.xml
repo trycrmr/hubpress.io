@@ -1,4 +1,123 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Oct 2016 19:30:29 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Installing Squid on CentOS 7]]></title><description><![CDATA[<div class="sect1">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Oct 2016 19:30:57 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="http://legis-graph.github.io/legis-graph-spatial/">Here&#8217;s an example application</a> issuing spatial queries to Neo4j and the <a href="https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/">associated blog post</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The following assumptions are made: You have a version of <a href="https://neo4j.com/download/other-releases/">Neo4j 3.x</a> installed. You are familiar with <a href="http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started">the Cypher Query Language ("Ascii art for graph databases")</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Installation</div>
+<ol class="arabic">
+<li>
+<p>Create a plugins folder within your Neo4j database location. In my case this was
+<code>/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins</code>.</p>
+</li>
+<li>
+<p>Download the appropriate version of the <a href="https://github.com/neo4j-contrib/spatial">neo4j-spatial</a> plugin for your 3.x version of Neo4j. This is likely a zipped up .jar file.</p>
+</li>
+<li>
+<p>unzip the .jar file and put it in the plugins directory created earlier. The full path to my neo4j-spatial .jar file is <code>/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins/neo4j-spatial-0.19-neo4j-3.0.3-server-plugin.jar</code>.</p>
+</li>
+<li>
+<p>Restart your Neo4j server</p>
+</li>
+<li>
+<p>Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: <code>CALL spatial.procedures</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from <a href="https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java">the code</a> at this time. For example, the parameters for the <code>spatial.withinDistance</code> are listed in the code below (hint: <code>@Name</code>)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Procedure("spatial.withinDistance")
+    @PerformsWrites // TODO FIX
+    public Stream&lt;NodeDistanceResult&gt; findGeometriesWithinDistance(
+            @Name("layerName") String name,
+            @Name("coordinate") Object coordinate,
+            @Name("distanceInKm") double distanceInKm) {
+
+        Layer layer = getLayerOrThrow(name);
+        return GeoPipeline
+                .startNearestNeighborLatLonSearch(layer, toCoordinate(coordinate), distanceInKm)
+                .sort(DISTANCE)
+                .stream().map(r -&gt; {
+                    double distance = r.hasProperty(DISTANCE) ? ((Number) r.getProperty(DISTANCE)).doubleValue() : -1;
+                    return new NodeDistanceResult(r.getGeomNode(), distance);
+                });
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+To be continued&#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">TODO</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Create test data to prove spatial capabilities</p>
+</li>
+<li>
+<p>Issue a spatial cypher query on test data</p>
+</li>
+<li>
+<p>Incorporate into larger dataset</p>
+</li>
+<li>
+<p>Prove on a larger dataset</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">NOTES</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://vimeo.com/89064528">0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial</a></p>
+</li>
+<li>
+<p>No documentation on</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>]]></description><link>https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</link><guid isPermaLink="true">https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</guid><category><![CDATA[Neo4j]]></category><category><![CDATA[ neo4j-spatial]]></category><category><![CDATA[ Installation]]></category><category><![CDATA[ Configuration]]></category><dc:creator><![CDATA[Terry Creamer]]></dc:creator><pubDate>Sat, 08 Oct 2016 00:00:00 GMT</pubDate></item><item><title><![CDATA[Installing Squid on CentOS 7]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_installing_a_href_http_www_squid_cache_org_squid_a_on_centos_7">Installing <a href="http://www.squid-cache.org/">Squid</a> on CentOS 7</h2>
 <div class="sectionbody">
 <div class="admonitionblock caution">
