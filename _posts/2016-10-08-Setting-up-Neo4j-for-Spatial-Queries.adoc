@@ -17,7 +17,7 @@ CAUTION: The following assumptions are made: You have a version of link:https://
 . Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: `CALL spatial.procedures`
 .. Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from link:https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java[the code] at this time. For example, the parameters for the `spatial.withinDistance` are listed in the code below (hint: `@Name`)
 
-[source: java]
+[source,java]
 ----
     @Procedure("spatial.withinDistance")
     @PerformsWrites // TODO FIX
