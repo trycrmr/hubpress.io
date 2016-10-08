@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1475954475823"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1475954475823"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1475954475823"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1475955004878"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1475955004878"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1475955004878"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1475954475823"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1475955004878"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
     <meta name="referrer" content="origin" />
@@ -164,7 +164,7 @@ null
             <ul class="post-meta-list">
               <li class="post-meta-item">
                 <time datetime="2016-10-08" itemprop="datePublished">
-                  15 hours ago
+                  16 hours ago
                 </time>
               </li>
                 <li class="post-meta-item">
@@ -236,8 +236,35 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </li>
 <li>
 <p>Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: <code>CALL spatial.procedures</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from <a href="https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java">the code</a> at this time. For example, the parameters for the <code>spatial.withinDistance</code> are listed in the code below (hint: <code>@Name</code>)</p>
 </li>
 </ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    @Procedure("spatial.withinDistance")
+    @PerformsWrites // TODO FIX
+    public Stream&lt;NodeDistanceResult&gt; findGeometriesWithinDistance(
+            @Name("layerName") String name,
+            @Name("coordinate") Object coordinate,
+            @Name("distanceInKm") double distanceInKm) {
+
+        Layer layer = getLayerOrThrow(name);
+        return GeoPipeline
+                .startNearestNeighborLatLonSearch(layer, toCoordinate(coordinate), distanceInKm)
+                .sort(DISTANCE)
+                .stream().map(r -&gt; {
+                    double distance = r.hasProperty(DISTANCE) ? ((Number) r.getProperty(DISTANCE)).doubleValue() : -1;
+                    return new NodeDistanceResult(r.getGeomNode(), distance);
+                });
+    }</pre>
+</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -268,6 +295,19 @@ To be continued&#8230;&#8203;
 </li>
 <li>
 <p>Prove on a larger dataset</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">NOTES</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://vimeo.com/89064528">0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial</a></p>
+</li>
+<li>
+<p>No documentation on</p>
 </li>
 </ul>
 </div>
@@ -334,7 +374,7 @@ To be continued&#8230;&#8203;
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1475954475823"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1475955004878"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
