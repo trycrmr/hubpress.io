@@ -17,7 +17,7 @@ CAUTION: The following assumptions are made: You have a version of link:https://
 . unzip the .jar file and put it in the plugins directory created earlier. The full path to my neo4j-spatial .jar file is `/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins/neo4j-spatial-0.19-neo4j-3.0.3-server-plugin.jar`.
 . Restart your Neo4j server
 . Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: `CALL spatial.procedures`
-.. Note: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from link:https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java[the code] at this time. For example, the parameters for the `spatial.withinDistance` are listed in the code below (hint: `@Name`)
+.. *Note*: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from link:https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java[the code] at this time. For example, the parameters for the `spatial.withinDistance` are listed in the code below (hint: `@Name`)
 
 [source,java]
 ----
