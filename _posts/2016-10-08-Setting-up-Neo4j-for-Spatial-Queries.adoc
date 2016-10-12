@@ -58,6 +58,7 @@ NOTES::
 * https://hiu.state.gov/data/data.aspx
 * http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
 * http://gis.stackexchange.com/questions/7339/converting-shapefiles-to-text-ascii-files
+* http://gis.stackexchange.com/questions/54870/how-to-convert-a-shapefile-to-wkt
 * 
 //^ 
 
