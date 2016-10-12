@@ -50,6 +50,12 @@ TODO::
 * Incorporate into larger dataset
 * Prove on a larger dataset
 
+.stuff
+. Add layer
+. Add nodes to layer
+.. Bulk add nodes to layer
+. issue query using findGeometriesWithinDistance (or withinDistance)
+
 NOTES::
 * link:https://vimeo.com/89064528[0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial]
 * http://stackoverflow.com/questions/26560023/how-do-i-create-a-spacial-index-in-neo4j-using-only-cypher
