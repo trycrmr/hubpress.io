@@ -38,8 +38,9 @@ CAUTION: The following assumptions are made: You have a version of link:https://
                 });
     }
 ----
+//^ 
 
-
+NOTE: No data is imported by this plugin. Each map layer can be created by pointing the appropriate procedure at a shapefile. 
 
 IMPORTANT: To be continued...
 
