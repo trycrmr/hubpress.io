@@ -1,4 +1,4 @@
-= Setting up Neo4j for Spatial Queries
+= Setting up Neo4j for Spatial Queries (in progress)
 //^
 
 :hp-tags: Neo4j, neo4j-spatial, Installation, Configuration
