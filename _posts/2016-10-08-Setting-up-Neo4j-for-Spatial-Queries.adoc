@@ -55,6 +55,9 @@ NOTES::
 * http://stackoverflow.com/questions/26560023/how-do-i-create-a-spacial-index-in-neo4j-using-only-cypher
 * http://stackoverflow.com/questions/37219809/neo4j-3-0-0-spatial-in-cypher
 * http://www.lyonwj.com/2016/08/09/neo4j-spatial-procedures-congressional-boundaries/
+* https://hiu.state.gov/data/data.aspx
+* http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
+* http://gis.stackexchange.com/questions/7339/converting-shapefiles-to-text-ascii-files
 * 
 //^ 
 
