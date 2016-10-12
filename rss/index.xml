@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 12 Oct 2016 16:33:11 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 12 Oct 2016 16:48:13 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -115,6 +115,28 @@ To be continued&#8230;&#8203;
 </ul>
 </div>
 </dd>
+</dl>
+</div>
+<div class="olist arabic">
+<div class="title">stuff</div>
+<ol class="arabic">
+<li>
+<p>Add layer</p>
+</li>
+<li>
+<p>Add nodes to layer</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Bulk add nodes to layer</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>issue query using findGeometriesWithinDistance (or withinDistance)</p>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">NOTES</dt>
 <dd>
 <div class="ulist">
@@ -148,6 +170,9 @@ To be continued&#8230;&#8203;
 </div>
 </dd>
 </dl>
+</div>
+</li>
+</ol>
 </div>]]></description><link>https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</link><guid isPermaLink="true">https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</guid><category><![CDATA[Neo4j]]></category><category><![CDATA[ neo4j-spatial]]></category><category><![CDATA[ Installation]]></category><category><![CDATA[ Configuration]]></category><dc:creator><![CDATA[Terry Creamer]]></dc:creator><pubDate>Sat, 08 Oct 2016 00:00:00 GMT</pubDate></item><item><title><![CDATA[Installing Squid on CentOS 7]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_installing_a_href_http_www_squid_cache_org_squid_a_on_centos_7">Installing <a href="http://www.squid-cache.org/">Squid</a> on CentOS 7</h2>
 <div class="sectionbody">
