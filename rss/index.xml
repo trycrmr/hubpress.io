@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 13:09:44 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 13:18:44 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -108,7 +108,7 @@ No data is imported by this plugin. Each map layer can be created by pointing th
 </div>
 </li>
 <li>
-<p>Two of the procedures neo4j-spatial provides (as of October 2016) are <code>importShapefileToLayer(layerName :: STRING?, uri :: STRING?)</code> and <code>CALL spatial.addLayer("countryBorders","WKB","geometry")</code>. It takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate these procedures exists then:</p>
+<p>Two of the procedures neo4j-spatial provides (as of October 2016) are <code>addLayer(name :: STRING?, type :: STRING?, encoderConfig :: STRING?)</code> and <code>importShapefileToLayer(layerName :: STRING?, uri :: STRING?)</code>. addLayer takes three arguments: importShapefileToLayer takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate these procedures exists then:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
