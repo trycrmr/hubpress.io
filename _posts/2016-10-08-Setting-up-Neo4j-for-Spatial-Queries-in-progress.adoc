@@ -42,6 +42,9 @@ CAUTION: The following assumptions are made: You have a version of link:https://
 
 NOTE: No data is imported by this plugin. Each map layer can be created by pointing the appropriate procedure at a shapefile. 
 
+.Importing a Map Layer
+. Find a Shapefile of the area you would like your graph database to map. In this case we will use one of the State Department's 
+
 IMPORTANT: To be continued...
 
 TODO::
