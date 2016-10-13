@@ -75,7 +75,7 @@ NOTES::
 * http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
 * http://gis.stackexchange.com/questions/7339/converting-shapefiles-to-text-ascii-files
 * http://gis.stackexchange.com/questions/54870/how-to-convert-a-shapefile-to-wkt
-* 
+* http://gist.asciidoctor.org/?dropbox-14493611%2Fcypher_spatial.adoc#_spatial_procedures
 //^ 
 
 //WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
