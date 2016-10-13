@@ -76,6 +76,15 @@ NOTES::
 * http://gis.stackexchange.com/questions/7339/converting-shapefiles-to-text-ascii-files
 * http://gis.stackexchange.com/questions/54870/how-to-convert-a-shapefile-to-wkt
 * http://gist.asciidoctor.org/?dropbox-14493611%2Fcypher_spatial.adoc#_spatial_procedures
+* http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
+* ESRI countries https://www.arcgis.com/home/item.html?id=3864c63872d84aec91933618e3815dd2
+* https://en.wikipedia.org/wiki/World_Geodetic_System
+* WGS countries http://www.gadm.org/country 
+* more up to date William Lyons post on using the user defined procedures in neo4j-spatial http://www.lyonwj.com/2016/08/09/neo4j-spatial-procedures-congressional-boundaries/
+* neo4j-spatial guy http://stackoverflow.com/users/2954199/william-lyon?tab=profile
+* http://stackoverflow.com/questions/38231044/how-do-i-create-a-simplepointlayer-in-neo4j-spatial
+* http://neo4j-contrib.github.io/spatial/
+* 
 //^ 
 
 //WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
