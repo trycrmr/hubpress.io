@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 13:06:06 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 13:09:44 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -29,7 +29,7 @@
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-The following assumptions are made: You have a version of <a href="https://neo4j.com/download/other-releases/">Neo4j 3.x</a> installed. You are familiar with <a href="http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started">the Cypher Query Language ("Ascii art for graph databases")</a>.
+The following assumptions are made: You have a version of <a href="https://neo4j.com/download/other-releases/">Neo4j 3.x</a> installed. You are familiar with <a href="http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started">the Cypher Query Language ("Ascii art for graph databases")</a>. All work is performed through the Neo4j browser interface.
 </td>
 </tr>
 </table>
@@ -108,9 +108,12 @@ No data is imported by this plugin. Each map layer can be created by pointing th
 </div>
 </li>
 <li>
-<p>One of the procedures neo4j-spatial provides (as of October 2016) is <code>importShapefileToLayer(layerName :: STRING?, uri :: STRING?)</code>. It takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate that procedure exists then:</p>
+<p>Two of the procedures neo4j-spatial provides (as of October 2016) are <code>importShapefileToLayer(layerName :: STRING?, uri :: STRING?)</code> and <code>CALL spatial.addLayer("countryBorders","WKB","geometry")</code>. It takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate these procedures exists then:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
+<li>
+<p>Call the addLayer procedure. In my case the cypher statement was <code>CALL spatial.addLayer("countryBorders","WKB","geometry")</code>.</p>
+</li>
 <li>
 <p>Place the folder containing all the files downloaded in step 1 in Neo4j&#8217;s /bin directory. In my case the location of the directory was <code>/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin</code>. The procedure will look for the folder of Shapefiles in the /bin directory.</p>
 </li>
