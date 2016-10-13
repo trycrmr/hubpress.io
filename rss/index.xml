@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 12:32:33 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 13 Oct 2016 12:59:02 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries (in progress)]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -35,7 +35,7 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </table>
 </div>
 <div class="olist arabic">
-<div class="title">Installation</div>
+<div class="title">Installation of neo4j-spatial</div>
 <ol class="arabic">
 <li>
 <p>Create a plugins folder within your Neo4j database location. In my case this was
@@ -98,7 +98,24 @@ No data is imported by this plugin. Each map layer can be created by pointing th
 <div class="title">Importing a Map Layer</div>
 <ol class="arabic">
 <li>
-<p>Find a Shapefile of the area you would like your graph database to map. In this case we will use one of the State Department&#8217;s</p>
+<p>Find the mapping data (i.e. Shapefiles) of the area you would like your graph database to map. In this case we will use <a href="https://hiu.state.gov/data/data.aspx">Shapefiles provided by the U.S. State Department</a>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Of note: The download will contain several files. We will need all of them.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>One of the procedures neo4j-spatial provides (as of October 2016) is <code>importShapefileToLayer(layerName :: STRING?, uri :: STRING?)</code>. It takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate that procedure exists then:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Place the folder containing all the files downloaded in step 1 in Neo4j&#8217;s /bin directory. In my case the location of the directory was <code>/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin</code>. The procedure will look for the file in the /bin directory</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
