@@ -46,7 +46,8 @@ NOTE: No data is imported by this plugin. Each map layer can be created by point
 . Find the mapping data (i.e. Shapefiles) of the area you would like your graph database to map. In this case we will use link:https://hiu.state.gov/data/data.aspx[Shapefiles provided by the U.S. State Department].
 .. Of note: The download will contain several files. We will need all of them. 
 . One of the procedures neo4j-spatial provides (as of October 2016) is `importShapefileToLayer(layerName :: STRING?, uri :: STRING?)`. It takes two arguments: Whatever you would like to name the layer and a URI of where the Shapefiles are located. Validate that procedure exists then:
-.. Place the folder containing all the files downloaded in step 1 in Neo4j's /bin directory. In my case the location of the directory was `/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin`. The procedure will look for the file in the /bin directory
+.. Place the folder containing all the files downloaded in step 1 in Neo4j's /bin directory. In my case the location of the directory was `/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin`. The procedure will look for the folder of Shapefiles in the /bin directory.
+.. Call the procedure passing the name of the layer and the location of the .shp file within the Shapefiles folder relative to the /bin directory. In my case the call was `CALL spatial.importShapefileToLayer("countryBorders","AFRICAandAMERICAS_LSIB4b_2012Sep04_USDoS_HIU/USDoS_LSIB4b_Africa_Americas_Sep2012.shp")`.
 
 IMPORTANT: To be continued...
 
