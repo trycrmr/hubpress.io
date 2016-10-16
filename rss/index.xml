@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:22:40 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:23:38 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -34,8 +36,11 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_installation_of_neo4j_spatial">Installation of neo4j-spatial</h3>
 <div class="olist arabic">
-<div class="title">Installation of neo4j-spatial</div>
 <ol class="arabic">
 <li>
 <p>Create a plugins folder within your Neo4j database location. In my case this was
@@ -82,8 +87,10 @@ The following assumptions are made: You have a version of <a href="https://neo4j
     }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_importing_a_map_layer">Importing a Map Layer</h3>
 <div class="olist arabic">
-<div class="title">Importing a Map Layer</div>
 <ol class="arabic">
 <li>
 <p>Find the mapping data (i.e. Shapefiles) of the area you would like your graph database to map. In this case we will use <a href="http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/">Shapefiles provided by Natural Earth, supported by the North American Cartographic Information Society</a>.</p>
@@ -133,9 +140,9 @@ Maps can vary given what countries are recognized by the organizations creating 
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Finding a Point Within a Country</p>
 </div>
+<div class="sect2">
+<h3 id="_finding_a_point_within_a_country">Finding a Point Within a Country</h3>
 <div class="paragraph">
 <p>--1. Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher statements more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
 </div>
@@ -301,6 +308,7 @@ To be continued&#8230;&#8203;
 </div>
 </li>
 </ol>
+</div>
 </div>]]></description><link>https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</link><guid isPermaLink="true">https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html</guid><category><![CDATA[Neo4j]]></category><category><![CDATA[ neo4j-spatial]]></category><category><![CDATA[ Installation]]></category><category><![CDATA[ Configuration]]></category><dc:creator><![CDATA[Terry Creamer]]></dc:creator><pubDate>Sat, 08 Oct 2016 00:00:00 GMT</pubDate></item><item><title><![CDATA[Installing Squid on CentOS 7]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_installing_a_href_http_www_squid_cache_org_squid_a_on_centos_7">Installing <a href="http://www.squid-cache.org/">Squid</a> on CentOS 7</h2>
 <div class="sectionbody">
