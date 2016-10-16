@@ -87,6 +87,7 @@ NOTES::
 * http://neo4j-contrib.github.io/spatial/
 * http://techslides.com/list-of-countries-and-capitals
 * keep an eye out for negative lat/longs https://mynasadata.larc.nasa.gov/latitudelongitude-finder/
+* https://neo4j.com/docs/developer-manual/current/cypher/#_spherical_distance_using_the_haversin_function
 
 //^ 
 
