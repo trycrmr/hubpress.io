@@ -61,7 +61,7 @@ NOTE: Maps can vary given what countries are recognized by the organizations cre
 
 Finding a Point Within a Country
 
-1. Now that we have a map layer consisting of the world's countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:
+--1. Now that we have a map layer consisting of the world's countries we can find what country a point resides in. To make our Cypher statements more intuitive add a "Country" label to all nodes referencing the RTREE:
 
 ----
 MATCH ()-[:RTREE_REFERENCE]->(c)
@@ -69,15 +69,15 @@ SET c:Country
 RETURN c.NAME ORDER BY c.NAME
 ----
 
-2. Dude.
+--2. The withinDistance procedure will give us the nearest node to a point. Naturally, if a point is within a country, that country is the nearest country to that point. Passing what map layer withinDistance should use, the latitude and longitude as a map (i.e. key value pairs within curly brackets), and the radius around our point we would like to perform our search will provide use all the country nodes within one meter of this point.
 
 ----
-MATCH ()-[:RTREE_REFERENCE]->(c)
-SET c:Country
-RETURN c.NAME ORDER BY c.NAME
+CALL spatial.withinDistance('countryBordersWKT',
+{latitude: 33.93, longitude: -118.40}, 0.001) YIELD node as c
+RETURN c.NAME
 ----
 
-.
+As the latitude and longitude for Los Angeles was used this query should return "United States". 
 
 IMPORTANT: To be continued...
 
