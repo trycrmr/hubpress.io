@@ -68,7 +68,7 @@ MATCH ()-[:RTREE_REFERENCE]->(c)
 SET c:Country
 RETURN c.NAME ORDER BY c.NAME
 ----
-. Dude.
+2. Dude.
 
 [source, cypher]
 ----
