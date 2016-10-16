@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476641281439"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476641281439"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476641281439"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476641382821"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476641382821"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476641382821"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476641281439"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476641382821"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
     <meta name="referrer" content="origin" />
@@ -314,7 +314,7 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (n:ReferenceNode) RETURN n LIMIT 1</code></pre>
+<pre>MATCH (n:ReferenceNode) RETURN n LIMIT 1</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -329,13 +329,9 @@ Maps can vary given what countries are recognized by the organizations creating 
 </tr>
 </table>
 </div>
-<div class="olist arabic">
-<div class="title">Finding a Point Within a Country</div>
-<ol class="arabic">
-<li>
-<p>Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Finding a Point Within a Country
+1. Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -353,9 +349,9 @@ RETURN c.NAME ORDER BY c.NAME</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
+<pre>MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
 SET c:Country
-RETURN c.NAME ORDER BY c.NAME</code></pre>
+RETURN c.NAME ORDER BY c.NAME</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -555,7 +551,7 @@ To be continued&#8230;&#8203;
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476641281439"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476641382821"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
