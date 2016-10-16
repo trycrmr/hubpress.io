@@ -79,6 +79,8 @@ RETURN c.NAME
 
 As the latitude and longitude for Los Angeles was used this query should return "United States". 
 
+CAUTION: Keep an eye out for negative latitudes and longitudes. link:https://mynasadata.larc.nasa.gov/latitudelongitude-finder/[Here's a handy map for validating your querying the area of the world you think you are.]
+
 IMPORTANT: To be continued...
 
 TODO::
@@ -114,7 +116,6 @@ NOTES::
 * http://stackoverflow.com/questions/38231044/how-do-i-create-a-simplepointlayer-in-neo4j-spatial
 * http://neo4j-contrib.github.io/spatial/
 * http://techslides.com/list-of-countries-and-capitals
-* keep an eye out for negative lat/longs https://mynasadata.larc.nasa.gov/latitudelongitude-finder/
 * https://neo4j.com/docs/developer-manual/current/cypher/#_spherical_distance_using_the_haversin_function
 
 //^ 
