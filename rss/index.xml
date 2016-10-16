@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:19:25 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:22:40 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -159,6 +159,18 @@ RETURN c.NAME</pre>
 <div class="paragraph">
 <p>As the latitude and longitude for Los Angeles was used this query should return "United States".</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Keep an eye out for negative latitudes and longitudes. <a href="https://mynasadata.larc.nasa.gov/latitudelongitude-finder/">Here&#8217;s a handy map for validating your querying the area of the world you think you are.</a>
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -278,9 +290,6 @@ To be continued&#8230;&#8203;
 </li>
 <li>
 <p><a href="http://techslides.com/list-of-countries-and-capitals" class="bare">http://techslides.com/list-of-countries-and-capitals</a></p>
-</li>
-<li>
-<p>keep an eye out for negative lat/longs <a href="https://mynasadata.larc.nasa.gov/latitudelongitude-finder/" class="bare">https://mynasadata.larc.nasa.gov/latitudelongitude-finder/</a></p>
 </li>
 <li>
 <p><a href="https://neo4j.com/docs/developer-manual/current/cypher/#_spherical_distance_using_the_haversin_function" class="bare">https://neo4j.com/docs/developer-manual/current/cypher/#_spherical_distance_using_the_haversin_function</a></p>
