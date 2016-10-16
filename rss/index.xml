@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:10:05 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:19:25 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -136,26 +136,8 @@ Maps can vary given what countries are recognized by the organizations creating 
 <div class="paragraph">
 <p>Finding a Point Within a Country</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
-SET c:Country
-RETURN c.NAME ORDER BY c.NAME</pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dude.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>--1. Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher statements more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -165,7 +147,17 @@ RETURN c.NAME ORDER BY c.NAME</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>.</p>
+<p>--2. The withinDistance procedure will give us the nearest node to a point. Naturally, if a point is within a country, that country is the nearest country to that point. Passing what map layer withinDistance should use, the latitude and longitude as a map (i.e. key value pairs within curly brackets), and the radius around our point we would like to perform our search will provide use all the country nodes within one meter of this point.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CALL spatial.withinDistance('countryBordersWKT',
+{latitude: 33.93, longitude: -118.40}, 0.001) YIELD node as c
+RETURN c.NAME</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the latitude and longitude for Los Angeles was used this query should return "United States".</p>
 </div>
 <div class="admonitionblock important">
 <table>
