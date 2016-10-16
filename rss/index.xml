@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 17:50:38 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:07:35 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -106,13 +106,61 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 <p>Place the folder containing all the files downloaded in step 1 in Neo4j&#8217;s /bin directory. In my case the location of the directory was <code>/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin</code>. The procedure will look for the folder of Shapefiles in the /bin directory.</p>
 </li>
 <li>
-<p>Call the procedure importShapefileToLayer passing the name of the layer and the location of the .shp file within the Shapefiles folder relative to the /bin directory. In my case the call was <code>CALL spatial.importShapefileToLayer("countryBordersWKT","ne_10m_admin_0_countries/ne_10m_admin_0_countries.shp")</code>. This creates the <a href="https://en.wikipedia.org/wiki/R-tree">R-tree</a> structure within Neo4j database, which could be thought of as the mathematical backbone of the spatial capabilities neo4j-spatial facilitates creating and curating.
-.</p>
+<p>Call the procedure importShapefileToLayer passing the name of the layer and the location of the .shp file within the Shapefiles folder relative to the /bin directory. In my case the call was <code>CALL spatial.importShapefileToLayer("countryBordersWKT","ne_10m_admin_0_countries/ne_10m_admin_0_countries.shp")</code>. This creates the <a href="https://en.wikipedia.org/wiki/R-tree">R-tree</a> structure within Neo4j database, which could be thought of as the mathematical backbone of the spatial capabilities neo4j-spatial facilitates creating and curating.</p>
+</li>
+<li>
+<p>If the procedures ran without errors your map layer was successfully imported! You can validate this by finding the "spatial root" node and expanding the other nodes it&#8217;s related to.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (n:ReferenceNode) RETURN n LIMIT 1</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Maps can vary given what countries are recognized by the organizations creating the map in conjunction with when they were created. A pretty obvious example would be a map created in the 1600s would not include the United States.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Finding a Point Within a Country</div>
+<ol class="arabic">
+<li>
+<p>Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
+SET c:Country
+RETURN c.NAME ORDER BY c.NAME</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dude.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
+SET c:Country
+RETURN c.NAME ORDER BY c.NAME</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>.</p>
