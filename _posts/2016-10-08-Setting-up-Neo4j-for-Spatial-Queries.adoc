@@ -60,6 +60,7 @@ MATCH (n:ReferenceNode) RETURN n LIMIT 1
 NOTE: Maps can vary given what countries are recognized by the organizations creating the map in conjunction with when they were created. A pretty obvious example would be a map created in the 1600s would not include the United States. 
 
 Finding a Point Within a Country
+
 1. Now that we have a map layer consisting of the world's countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:
 
 ----
