@@ -77,6 +77,7 @@ NOTES::
 * http://gis.stackexchange.com/questions/54870/how-to-convert-a-shapefile-to-wkt
 * http://gist.asciidoctor.org/?dropbox-14493611%2Fcypher_spatial.adoc#_spatial_procedures
 * http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
+** GeoJSON of ^ https://github.com/AshKyd/geojson-regions/tree/master/data/countries/ne_10m_admin_0_countries.geo.json
 * ESRI countries https://www.arcgis.com/home/item.html?id=3864c63872d84aec91933618e3815dd2
 * https://en.wikipedia.org/wiki/World_Geodetic_System
 * WGS countries http://www.gadm.org/country 
@@ -84,7 +85,7 @@ NOTES::
 * neo4j-spatial guy http://stackoverflow.com/users/2954199/william-lyon?tab=profile
 * http://stackoverflow.com/questions/38231044/how-do-i-create-a-simplepointlayer-in-neo4j-spatial
 * http://neo4j-contrib.github.io/spatial/
-* 
+* http://techslides.com/list-of-countries-and-capitals
 //^ 
 
 //WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
