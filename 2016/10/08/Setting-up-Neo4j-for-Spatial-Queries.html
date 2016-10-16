@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476640157341"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476640157341"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476640157341"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476640238532"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476640238532"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476640238532"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476640157341"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476640238532"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
     <meta name="referrer" content="origin" />
@@ -278,18 +278,6 @@ The following assumptions are made: You have a version of <a href="https://neo4j
     }</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-No data is imported by this plugin. Each map layer can be created by pointing the appropriate procedure at a shapefile.
-</td>
-</tr>
-</table>
-</div>
 <div class="olist arabic">
 <div class="title">Importing a Map Layer</div>
 <ol class="arabic">
@@ -308,7 +296,7 @@ No data is imported by this plugin. Each map layer can be created by pointing th
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Call the addLayer procedure. In my case the cypher statement was <code>CALL spatial.addLayer("countryBordersWKT","WKT")</code>. <a href="https://en.wikipedia.org/wiki/Well-known_text">WKB</a> was used because the importShapefileToLayer assumes the WKB format.</p>
+<p>Call the addLayer procedure. In my case the cypher statement was <code>CALL spatial.addLayer("countryBordersWKT","WKT")</code>.</p>
 </li>
 <li>
 <p>Place the folder containing all the files downloaded in step 1 in Neo4j&#8217;s /bin directory. In my case the location of the directory was <code>/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin</code>. The procedure will look for the folder of Shapefiles in the /bin directory.</p>
@@ -519,7 +507,7 @@ To be continued&#8230;&#8203;
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476640157341"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476640238532"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
