@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:08:01 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Oct 2016 18:09:42 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Setting up Neo4j for Spatial Queries]]></title><description><![CDATA[<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
@@ -118,7 +118,7 @@ The following assumptions are made: You have a version of <a href="https://neo4j
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (n:ReferenceNode) RETURN n LIMIT 1</code></pre>
+<pre>MATCH (n:ReferenceNode) RETURN n LIMIT 1</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -133,13 +133,9 @@ Maps can vary given what countries are recognized by the organizations creating 
 </tr>
 </table>
 </div>
-<div class="olist arabic">
-<div class="title">Finding a Point Within a Country</div>
-<ol class="arabic">
-<li>
-<p>Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Finding a Point Within a Country
+1. Now that we have a map layer consisting of the world&#8217;s countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -157,9 +153,9 @@ RETURN c.NAME ORDER BY c.NAME</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
+<pre>MATCH ()-[:RTREE_REFERENCE]-&gt;(c)
 SET c:Country
-RETURN c.NAME ORDER BY c.NAME</code></pre>
+RETURN c.NAME ORDER BY c.NAME</pre>
 </div>
 </div>
 <div class="paragraph">
