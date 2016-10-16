@@ -86,6 +86,8 @@ NOTES::
 * http://stackoverflow.com/questions/38231044/how-do-i-create-a-simplepointlayer-in-neo4j-spatial
 * http://neo4j-contrib.github.io/spatial/
 * http://techslides.com/list-of-countries-and-capitals
+* keep an eye out for negative lat/longs https://mynasadata.larc.nasa.gov/latitudelongitude-finder/
+
 //^ 
 
 //WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
