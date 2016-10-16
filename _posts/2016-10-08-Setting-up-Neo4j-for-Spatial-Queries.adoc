@@ -52,7 +52,6 @@ CAUTION: The following assumptions are made: You have a version of link:https://
 .. If the procedures ran without errors your map layer was successfully imported! You can validate this by finding the "spatial root" node and expanding the other nodes it's related to.
 //^
 
-[source, cypher]
 ----
 MATCH (n:ReferenceNode) RETURN n LIMIT 1
 ----
@@ -60,7 +59,7 @@ MATCH (n:ReferenceNode) RETURN n LIMIT 1
 
 NOTE: Maps can vary given what countries are recognized by the organizations creating the map in conjunction with when they were created. A pretty obvious example would be a map created in the 1600s would not include the United States. 
 
-.Finding a Point Within a Country
+Finding a Point Within a Country
 1. Now that we have a map layer consisting of the world's countries we can find what country a point resides in. To make our Cypher more intuitive add a "Country" label to all nodes referencing the RTREE:
 
 ----
@@ -68,9 +67,9 @@ MATCH ()-[:RTREE_REFERENCE]->(c)
 SET c:Country
 RETURN c.NAME ORDER BY c.NAME
 ----
+
 2. Dude.
 
-[source, cypher]
 ----
 MATCH ()-[:RTREE_REFERENCE]->(c)
 SET c:Country
