@@ -81,6 +81,35 @@ As the latitude and longitude for Los Angeles was used this query should return 
 
 CAUTION: Keep an eye out for negative latitudes and longitudes. link:https://mynasadata.larc.nasa.gov/latitudelongitude-finder/[Here's a handy map for validating your querying the area of the world you think you are.]
 
+== Add a Point to a Point Layer
+--1. Create a node with a latitude and longitude. The following query will also create a `WITHIN` relationship between that node and the country it resides in. This will be useful if one would like to query for points only within a specific country.
+
+----
+CREATE (l:Location {latitude: 43.65, longitude: -79.38, name: "Toronto"})
+WITH l
+CALL spatial.withinDistance('countryBordersWKT',
+{latitude: l.latitude, longitude: l.longitude}, 0.001) YIELD node as c
+CREATE (l)-[:WITHIN]->(c)
+RETURN *
+----
+
+--2. Create a point layer. This can be done using the neo4j-spatial procedure `addLayer`:
+
+----
+CALL spatial.addLayer("locations","SimplePoint","")
+----
+
+--3. Add the nodes to the point layer. The following cypher will add all the nodes with the `Location` label to the point layer:
+
+----
+MATCH (l:Location)
+WITH collect(l) AS locations
+CALL spatial.addNodes('locations', locations) YIELD node
+RETURN count(*)
+----
+
+
+
 IMPORTANT: To be continued...
 
 TODO::
