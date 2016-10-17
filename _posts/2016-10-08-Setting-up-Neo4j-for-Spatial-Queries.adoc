@@ -103,6 +103,7 @@ CALL spatial.addLayer("locations","SimplePoint","")
 
 ----
 MATCH (l:Location)
+WHERE NOT (l)<-[:RTREE_REFERENCE]-()
 WITH collect(l) AS locations
 CALL spatial.addNodes('locations', locations) YIELD node
 RETURN count(*)
