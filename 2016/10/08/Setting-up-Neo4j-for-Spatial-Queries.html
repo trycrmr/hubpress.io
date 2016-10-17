@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476721283744"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476721283744"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476721283744"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1476722334256"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1476722334256"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1476722334256"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476721283744"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1476722334256"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2016/10/08/Setting-up-Neo4j-for-Spatial-Queries.html" />
     <meta name="referrer" content="origin" />
@@ -411,6 +411,25 @@ CALL spatial.addNodes('locations', locations) YIELD node
 RETURN count(*)</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>--4. Validate you can perform a query that calculates the distance between two location nodes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>MATCH (a:Location {name: "Baltimore"}),(b:Location {name: "Los Angeles"})
+RETURN a.name, b.name, toInt(distance(point(a),point(b)) / 1000) as distance;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The query will provide the distance in kilometers between two locations which are in the same country:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>MATCH (a:Location {name: "Baltimore"}),(b:Location),(a)-[:WITHIN]-&gt;(c:Country)
+WHERE NOT a.name = b.name AND (b)-[:WITHIN]-&gt;(c)
+RETURN a.name, b.name, c.NAME, toInt(distance(point(a),point(b)) / 1000) as distanceInKM ORDER BY distanceInKM</pre>
+</div>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -604,7 +623,7 @@ To be continued&#8230;&#8203;
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476721283744"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1476722334256"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
