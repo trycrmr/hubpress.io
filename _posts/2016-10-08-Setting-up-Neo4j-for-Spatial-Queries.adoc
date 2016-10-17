@@ -93,7 +93,7 @@ CREATE (l)-[:WITHIN]->(c)
 RETURN *
 ----
 
---4. Validate you can perform a query that calculates the distance between two location nodes. 
+--2. Validate you can perform a query that calculates the distance between two location nodes. 
 
 ----
 MATCH (a:Location {name: "Baltimore"}),(b:Location {name: "Los Angeles"})
