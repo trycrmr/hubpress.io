@@ -93,22 +93,6 @@ CREATE (l)-[:WITHIN]->(c)
 RETURN *
 ----
 
---2. Create a point layer. This can be done using the neo4j-spatial procedure `addLayer`:
-
-----
-CALL spatial.addLayer("locations","SimplePoint","")
-----
-
---3. Add the nodes to the point layer. The following cypher will add all the nodes with the `Location` label to the point layer:
-
-----
-MATCH (l:Location)
-WHERE NOT (l)<-[:RTREE_REFERENCE]-()
-WITH collect(l) AS locations
-CALL spatial.addNodes('locations', locations) YIELD node
-RETURN count(*)
-----
-
 --4. Validate you can perform a query that calculates the distance between two location nodes. 
 
 ----
@@ -116,7 +100,7 @@ MATCH (a:Location {name: "Baltimore"}),(b:Location {name: "Los Angeles"})
 RETURN a.name, b.name, toInt(distance(point(a),point(b)) / 1000) as distance;
 ----
 
-The query will provide the distance in kilometers between two locations which are in the same country:
+This query will provide the distance in kilometers between two locations which are in the same country:
 
 ----
 MATCH (a:Location {name: "Baltimore"}),(b:Location),(a)-[:WITHIN]->(c:Country)
@@ -167,6 +151,29 @@ NOTES::
 
 
 ////
+EXTRA STUFF
+
+
+--2. Create a point layer. This can be done using the neo4j-spatial procedure `addLayer`:
+
+----
+CALL spatial.addLayer("locations","SimplePoint","")
+----
+
+--3. Add the nodes to the point layer. The following cypher will add all the nodes with the `Location` label to the point layer:
+
+----
+MATCH (l:Location)
+WHERE NOT (l)<-[:RTREE_REFERENCE]-()
+WITH collect(l) AS locations
+CALL spatial.addNodes('locations', locations) YIELD node
+RETURN count(*)
+----
+
+
+END EXTRA STUFF
+
+
 .Configuration
 . Optional, remove comments from squid.conf, `grep -Eiv '(^#|^$)' /etc/squid/squid.conf > /etc/squid/squid.conf.new`
 . Set `http_port` from `3128` to `80 accel allow-direct`. This will allow Squid to proxy all HTTP traffic.
