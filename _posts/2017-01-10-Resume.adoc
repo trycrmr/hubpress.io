@@ -1,15 +1,12 @@
 = Resume
 //^
 
-:hp-tags: Terry, Creamer, Resume
-//^
-
 ==== Experience
 
 //^
 
 .*Deloitte Consulting LLP, Consultant, Washington, D.C. (July 2012 – October 2015)*
-I have filled several roles on different contracts with Deloitte, including:
+I filled several roles on different contracts with Deloitte, including:
 
 _SharePoint 2010 Developer, Applications Development, Internal Revenue Service (April 2015 – November 2015)_
 
