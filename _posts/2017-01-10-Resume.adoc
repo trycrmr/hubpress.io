@@ -11,7 +11,7 @@
 .*Deloitte Consulting LLP, Consultant, Washington, D.C. (July 2012 – October 2015)*
 I have filled several roles on different contracts with Deloitte, including:
 
-_SharePoint 2010 Developer, Applications Development, Internal Revenue Service_
+_SharePoint 2010 Developer, Applications Development, Internal Revenue Service (April 2015 – November 2015)_
 
 * Configured a custom SharePoint 2010 site to handle Web 2.0 like interaction with end-users while maintaining an apropos security model
 
@@ -25,7 +25,7 @@ _SharePoint 2010 Developer, Applications Development, Internal Revenue Service_
 
 * Implemented SCRUM project management best practices to manage enhancements to the SharePoint site
 
-Front-end Web Developer, D.Scrum, SharePoint Center of Excellence, Deloitte Consulting
+_Front-end Web Developer, D.Scrum, SharePoint Center of Excellence, Deloitte Consulting()_
 
 LLP (part-time in addition to client role)
 
