@@ -55,7 +55,7 @@ through their environments
 the end result against the original aspirations
 
 
-
+_Content Migrator, Department of Defense, Navy, Naval Facilities Engineering Command (NAVFAC) (October 2014 – December 2014)_
 
 
 TIP: link:http://legis-graph.github.io/legis-graph-spatial/[Here's an example application] issuing spatial queries to Neo4j and the link:https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/[associated blog post].
