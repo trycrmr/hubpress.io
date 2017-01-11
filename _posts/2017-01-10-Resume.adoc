@@ -1,0 +1,211 @@
+= Resume
+//^
+
+:hp-tags: Resume, Terry, Creamer, Terry Creamer
+//^
+
+TIP: link:http://legis-graph.github.io/legis-graph-spatial/[Here's an example application] issuing spatial queries to Neo4j and the link:https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/[associated blog post].
+
+CAUTION: The following assumptions are made: You have a version of link:https://neo4j.com/download/other-releases/[Neo4j 3.x] installed. You are familiar with link:http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started[the Cypher Query Language ("Ascii art for graph databases")]. All work is performed through the Neo4j browser interface.
+
+=== Installation of neo4j-spatial
+. Create a plugins folder within your Neo4j database location. In my case this was
+`/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins`.
+. Download the appropriate version of the link:https://github.com/neo4j-contrib/spatial[neo4j-spatial] plugin for your 3.x version of Neo4j. This is likely a zipped up .jar file.
+. unzip the .jar file and put it in the plugins directory created earlier. The full path to my neo4j-spatial .jar file is `/Users/trycrmr/Documents/Neo4j/3.0.3/spatialPlaytime/plugins/neo4j-spatial-0.19-neo4j-3.0.3-server-plugin.jar`.
+. Restart your Neo4j server
+. Issuing the following cypher query to Neo4j lists the procedures available to you now that the neo4j-spatial plugin is installed: `CALL spatial.procedures`
+.. *Note*: There is no documentation for the these procedures yet, but insights can be drawn (such as what parameters can be passed to the procedures) from link:https://github.com/neo4j-contrib/spatial/blob/master/src/main/java/org/neo4j/gis/spatial/procedures/SpatialProcedures.java[the code] at this time. For example, the parameters for the `spatial.withinDistance` are listed in the code below (hint: `@Name`)
+
+[source,java]
+----
+    @Procedure("spatial.withinDistance")
+    @PerformsWrites // TODO FIX
+    public Stream<NodeDistanceResult> findGeometriesWithinDistance(
+            @Name("layerName") String name,
+            @Name("coordinate") Object coordinate,
+            @Name("distanceInKm") double distanceInKm) {
+
+        Layer layer = getLayerOrThrow(name);
+        return GeoPipeline
+                .startNearestNeighborLatLonSearch(layer, toCoordinate(coordinate), distanceInKm)
+                .sort(DISTANCE)
+                .stream().map(r -> {
+                    double distance = r.hasProperty(DISTANCE) ? ((Number) r.getProperty(DISTANCE)).doubleValue() : -1;
+                    return new NodeDistanceResult(r.getGeomNode(), distance);
+                });
+    }
+----
+//^ 
+
+//NOTE: No data is imported by this plugin. Each map layer can be created by pointing the appropriate procedure at a shapefile. 
+
+=== Importing a Map Layer
+. Find the mapping data (i.e. Shapefiles) of the area you would like your graph database to map. In this case we will use link:http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/[Shapefiles provided by Natural Earth, supported by the North American Cartographic Information Society].
+.. Of note: The download will contain several files. We will need all of them. 
+. Two of the procedures neo4j-spatial provides (as of October 2016) are `addLayer(name :: STRING?, type :: STRING?, encoderConfig :: STRING?)` and `importShapefileToLayer(layerName :: STRING?, uri :: STRING?)`. addLayer takes three arguments: The name to use for the layer, the type of layer it is, and how it will be encoded. importShapefileToLayer takes two arguments: The name of the layer to import the Shapefile to and a URI of where the Shapefiles are located. Validate these procedures exists then:
+.. Call the addLayer procedure. In my case the cypher statement was `CALL spatial.addLayer("countryBordersWKT","WKT","")`. How it is encoded can be left blank in this instance.
+.. Place the folder containing all the files downloaded in step 1 in Neo4j's /bin directory. In my case the location of the directory was `/Applications/Neo4j Community Edition 2.app/Contents/Resources/app/bin`. The procedure will look for the folder of Shapefiles in the /bin directory.
+.. Call the procedure importShapefileToLayer passing the name of the layer and the location of the .shp file within the Shapefiles folder relative to the /bin directory. In my case the call was `CALL spatial.importShapefileToLayer("countryBordersWKT","ne_10m_admin_0_countries/ne_10m_admin_0_countries.shp")`. This creates the link:https://en.wikipedia.org/wiki/R-tree[R-tree] structure within Neo4j database, which could be thought of as the mathematical backbone of the spatial capabilities neo4j-spatial facilitates creating and curating.
+.. If the procedures ran without errors your map layer was successfully imported! You can validate this by finding the "spatial root" node and expanding the other nodes it's related to.
+//^
+
+----
+MATCH (n:ReferenceNode) RETURN n LIMIT 1
+----
+//^ 
+
+NOTE: Maps can vary given what countries are recognized by the organizations creating the map in conjunction with when they were created. A pretty obvious example would be a map created in the 1600s would not include the United States. 
+
+=== Finding a Point Within a Country
+
+--1. Now that we have a map layer consisting of the world's countries we can find what country a point resides in. To make our Cypher statements more intuitive add a "Country" label to all nodes referencing the RTREE:
+
+----
+MATCH ()-[:RTREE_REFERENCE]->(c)
+SET c:Country
+RETURN c.NAME ORDER BY c.NAME
+----
+
+--2. The withinDistance procedure will give us the nearest node to a point. Naturally, if a point is within a country, that country is the nearest country to that point. Passing what map layer withinDistance should use, the latitude and longitude as a map (i.e. key value pairs within curly brackets), and the radius around our point we would like to perform our search will provide use all the country nodes within one meter of this point.
+
+----
+CALL spatial.withinDistance('countryBordersWKT',
+{latitude: 33.93, longitude: -118.40}, 0.001) YIELD node as c
+RETURN c.NAME
+----
+
+As the latitude and longitude for Los Angeles was used this query should return "United States". 
+
+CAUTION: Keep an eye out for negative latitudes and longitudes. link:https://mynasadata.larc.nasa.gov/latitudelongitude-finder/[Here's a handy map for validating your querying the area of the world you think you are.]
+
+== Search for the distance between nodes in the same country
+--1. Create a node with a latitude and longitude. The following query will also create a `WITHIN` relationship between that node and the country it resides in. This will be useful if one would like to query for points only within a specific country.
+
+----
+CREATE (l:Location {latitude: 43.65, longitude: -79.38, name: "Toronto"})
+WITH l
+CALL spatial.withinDistance('countryBordersWKT',
+{latitude: l.latitude, longitude: l.longitude}, 0.001) YIELD node as c
+CREATE (l)-[:WITHIN]->(c)
+RETURN *
+----
+
+--2. Validate you can perform a query that calculates the distance between two location nodes. 
+
+----
+MATCH (a:Location {name: "Baltimore"}),(b:Location {name: "Los Angeles"})
+RETURN a.name, b.name, toInt(distance(point(a),point(b)) / 1000) as distance;
+----
+
+This query will provide the distance in kilometers between two locations which are in the same country:
+
+----
+MATCH (a:Location {name: "Baltimore"}),(b:Location),(a)-[:WITHIN]->(c:Country)
+WHERE NOT a.name = b.name AND (b)-[:WITHIN]->(c)
+RETURN a.name, b.name, c.NAME, toInt(distance(point(a),point(b)) / 1000) as distanceInKM ORDER BY distanceInKM
+----
+
+IMPORTANT: To be continued...
+
+TODO::
+
+* Create test data to prove spatial capabilities
+* Issue a spatial cypher query on test data
+* Incorporate into larger dataset
+* Prove on a larger dataset
+
+.stuff
+. Add layer
+. Add nodes to layer
+.. Bulk add nodes to layer
+. issue query using findGeometriesWithinDistance (or withinDistance)
+
+NOTES::
+* link:https://vimeo.com/89064528[0313 - Recommend Restaurants Near Me: Introduction to Neo4j Spatial]
+* http://stackoverflow.com/questions/26560023/how-do-i-create-a-spacial-index-in-neo4j-using-only-cypher
+* http://stackoverflow.com/questions/37219809/neo4j-3-0-0-spatial-in-cypher
+* http://www.lyonwj.com/2016/08/09/neo4j-spatial-procedures-congressional-boundaries/
+* https://hiu.state.gov/data/data.aspx
+* http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
+* http://gis.stackexchange.com/questions/7339/converting-shapefiles-to-text-ascii-files
+* http://gis.stackexchange.com/questions/54870/how-to-convert-a-shapefile-to-wkt
+* http://gist.asciidoctor.org/?dropbox-14493611%2Fcypher_spatial.adoc#_spatial_procedures
+* http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
+** GeoJSON of ^ https://github.com/AshKyd/geojson-regions/tree/master/data/countries/ne_10m_admin_0_countries.geo.json
+* ESRI countries https://www.arcgis.com/home/item.html?id=3864c63872d84aec91933618e3815dd2
+* https://en.wikipedia.org/wiki/World_Geodetic_System
+* WGS countries http://www.gadm.org/country 
+* more up to date William Lyons post on using the user defined procedures in neo4j-spatial http://www.lyonwj.com/2016/08/09/neo4j-spatial-procedures-congressional-boundaries/
+* neo4j-spatial guy http://stackoverflow.com/users/2954199/william-lyon?tab=profile
+* http://stackoverflow.com/questions/38231044/how-do-i-create-a-simplepointlayer-in-neo4j-spatial
+* http://neo4j-contrib.github.io/spatial/
+* http://techslides.com/list-of-countries-and-capitals
+* https://neo4j.com/docs/developer-manual/current/cypher/#_spherical_distance_using_the_haversin_function
+
+//^ 
+
+//WARNING: These instructions are for standing up a simple, unsecure Squid instance. Secure appropriately for your context. 
+
+
+////
+EXTRA STUFF
+
+
+--2. Create a point layer. This can be done using the neo4j-spatial procedure `addLayer`:
+
+----
+CALL spatial.addLayer("locations","SimplePoint","")
+----
+
+--3. Add the nodes to the point layer. The following cypher will add all the nodes with the `Location` label to the point layer:
+
+----
+MATCH (l:Location)
+WHERE NOT (l)<-[:RTREE_REFERENCE]-()
+WITH collect(l) AS locations
+CALL spatial.addNodes('locations', locations) YIELD node
+RETURN count(*)
+----
+
+
+END EXTRA STUFF
+
+
+.Configuration
+. Optional, remove comments from squid.conf, `grep -Eiv '(^#|^$)' /etc/squid/squid.conf > /etc/squid/squid.conf.new`
+. Set `http_port` from `3128` to `80 accel allow-direct`. This will allow Squid to proxy all HTTP traffic.
+. Add the following rules. They will allow Squid to process and reply to any http traffic it receives:
+.. `http_access allow all`
+.. `http_reply_access allow all`
+
+//^ 
+
+TIP: For all the ways Squid can be configured, take advantage of link:http://wiki.squid-cache.org/[Squid's Wiki] and their link:http://www.squid-cache.org/Doc/[website's documentation] (particularly their link:http://www.squid-cache.org/Doc/config/[list of Squid configs]).
+
+.Starting
+. Enable Squid with systemctl: `systemctl enable squid`
+. Start Squid: `systemctl start squid`
+. Validate Squid is running by checking the processes `ps -ax | grep "squid"`
+//^ 
+
+NOTE: Changes to the squid.conf are implemented by restarting Squid ( `systemctl restart squid` )
+
+TIP: Firefox 47.x can be configured to point all traffic to a proxy server under Preferences > Advanced > Network > Connection. Can be useful for testing Squid.
+
+=== Optional Configurations
+
+.Caching
+. Uncomment `cache_dir ufs /var/spool/squid 100 16 256`
+. Comment out all the `refresh_pattern` configs except `refresh_pattern .`
+
+TIP: Validate Squid is properly proxying requests by tailing the access logs on the Squid server `tail -f /var/logs/squid/access.log`
+
+NOTE: If testing using Firefox 47.x by disabling the local browser web cache by changing the amount of space allocated to the local web cache to 0mb at Preferences > Advanced > Network > Cached Web Content
+
+.Load Balancer
+. Add the following configs to squid.conf, inserting the appropriate IP or Public DNS as necessary:
+.. `http_port 80 accel act-as-origin [insert primary destination server IP or Public DNS]`
+.. `cache_peer [insert primary destination server IP or Public DNS] 80 0 no-query originserver round-robin`
+.. `cache_peer [insert secondary destination server IP or Public DNS] parent 80 0 no-query originserver round-robin`
+. Test by navigating to Squid. You should see content from one of the two destination servers. 
