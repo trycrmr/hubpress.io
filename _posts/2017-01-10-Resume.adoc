@@ -57,6 +57,39 @@ the end result against the original aspirations
 
 _Content Migrator, Department of Defense, Navy, Naval Facilities Engineering Command (NAVFAC) (October 2014 – December 2014)_
 
+* Within a set time constraint, assisted various stakeholders across 15 business areas in migrating
+valued content and documentation to a new enterprise portal
+* Provided front-end web development support utilizing Oracle WebCenter Portal’s browser-based
+declarative development environment to replicate or enhance functionality demonstrated on the old
+portal
+* Tracked the results of our efforts against the amount of time left to fulfill and assisted in reporting
+the findings to leadership
+* Onboarded two new analysts of the firm onto the team, aligning their daily activities with the scope
+of the effort
+* Managed the client-relationship with several stakeholder representing different business areas,
+ensuring we were meeting their content migration targets
+
+_Adobe CQ Web Developer, Department of Defense, Navy, Naval History and Heritage
+Command (NHHC) (April 2014 - October 2014)_
+
+* Implemented several custom templates and components in Adobe CQ, aligning with the creation of an online portal for viewing archived Navy documentation and a blog
+* Technical effort involved writing Java Server Pages (incorporating Adobe CQ’s API as needed) and
+using front-end web technologies (HTML, CSS, and JavaScript) to present dynamic results
+* Appropriately unit tested my templates and components to ensure their responsiveness and browser
+compatibility
+* Worked with functional team members to ensure the client’s needs were filled by the latest development, addressing any gaps or other defects uncovered during testing
+* Provided level of effort estimates for several site enhancements including an online portal for viewing archived Navy documentation and a custom blog
+* Aided in source code management activities to prevent issues migrating latest development between
+environments
+* Configured the development environments for three other developers, enabling them to contribute and migrate source code to the testing environment
+* Established our defect tracking processes, taking advantage of Jira’s capabilities where applicable
+* Created initial project schedules to align level of effort estimates with resourcing and time constraints
+
+_SharePoint Developer 2010, Department of Homeland Security, National Protection and Programs Directorate (NPPD), Office of Infrastructure Protection (October 2013 - March 2014)_
+
+
+
+
 
 TIP: link:http://legis-graph.github.io/legis-graph-spatial/[Here's an example application] issuing spatial queries to Neo4j and the link:https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/[associated blog post].
 
