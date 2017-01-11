@@ -39,6 +39,25 @@ _Front-end Web Developer, D.Scrum, SharePoint Center of Excellence, Deloitte Con
 
 _Oracle WebCenter Application Specialist (Portal and Content), Department of Defense, Navy, Naval Facilities Engineering Command (NAVFAC) (December 2014 – April 2015)_
 
+* Oversaw the full lifecycle implementation of a storage and search solution using the Oracle WebCenter Product Suite’s out-of-the-box capabilities
+
+* Configured a local stack of Oracle Database 11g Release 2 (11.2.0.1.0), WebLogic Server 10.3.6,
+Oracle WebCenter Content 11.1.1.8 and Oracle WebCenter Portal 11.1.1.8 to mimic the client’s
+environment and prove the initial concept
+* Architected three solutions and vetted their advantages and disadvantages with the appropriate
+stakeholders
+* Translated client documentation and communications into an actionable and traceable set of
+requirements
+* Documented system design and configuration activities, constraints, and assumptions
+* Worked with the appropriate client personnel to garner access, build the solution, and migrate it
+through their environments
+* Worked with our prime contractor to deploy the solution in NAVFAC’s internal portal, validating
+the end result against the original aspirations
+
+
+
+
+
 TIP: link:http://legis-graph.github.io/legis-graph-spatial/[Here's an example application] issuing spatial queries to Neo4j and the link:https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/[associated blog post].
 
 CAUTION: The following assumptions are made: You have a version of link:https://neo4j.com/download/other-releases/[Neo4j 3.x] installed. You are familiar with link:http://neo4j.com/docs/developer-manual/current/get-started/#cypher-getting-started[the Cypher Query Language ("Ascii art for graph databases")]. All work is performed through the Neo4j browser interface.
