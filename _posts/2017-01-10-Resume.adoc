@@ -1,8 +1,53 @@
 = Resume
 //^
 
-:hp-tags: Resume, Terry, Creamer, Terry Creamer
+:hp-tags: Terry, Creamer, Resume
 //^
+
+==== Experience
+
+//^
+
+.*Deloitte Consulting LLP, Consultant, Washington, D.C. (July 2012 – October 2015)*
+I have filled several roles on different contracts with Deloitte, including:
+
+_SharePoint 2010 Developer, Applications Development, Internal Revenue Service_
+
+* Configured a custom SharePoint 2010 site to handle Web 2.0 like interaction with end-users while maintaining an apropos security model
+
+* Created a custom user experience to differentiate our SharePoint 2010 site from the other SharePoint sites on the enterprise implementation. Supplemented the user interface with custom HTML/CSS/JavaScript as needed.
+
+* Designed a security model allowing tiered access to change content on the site, enabling Site Administrators to distribute content management and operations to privileged stakeholders
+
+* Built a Change Management process to capture user’s reports of defects, requests for changes, and possible enhancements
+
+* Documented the site, it’s data structure, security model, approach to content management, and change management processes so future site administrators would be able to apply proper oversight
+
+* Implemented SCRUM project management best practices to manage enhancements to the SharePoint site
+
+Front-end Web Developer, D.Scrum, SharePoint Center of Excellence, Deloitte Consulting
+
+LLP (part-time in addition to client role)
+
+• Proposed, architected, and developed a SCRUM Project Management SharePoint 2010 Site made up
+
+of two custom front-end applications, an Angular.js Kanban Board and a Burndown Chart using d3.js
+
+• Used d3.js and SPservices to retrieve SharePoint 2010 List data in JSON, extract the relevant data,
+
+and present it as a SCRUM Burndown Chart
+
+• Drove the vision for the project, managing the progress of two other SharePoint 2010/Front-End
+
+Web Developers to hit benchmarks
+
+• Implemented an open source SharePoint 2010 styling template called Responsive SharePoint to
+
+incorporate Twitter Bootstrap into the SCRUM Project Management solution
+
+• Iterated through renditions of the solution with DConnect workstream leadership, incorporating
+
+feedback from previous demos into the latest version
 
 TIP: link:http://legis-graph.github.io/legis-graph-spatial/[Here's an example application] issuing spatial queries to Neo4j and the link:https://neo4j.com/blog/geospatial-indexing-us-congress-neo4j/[associated blog post].
 
