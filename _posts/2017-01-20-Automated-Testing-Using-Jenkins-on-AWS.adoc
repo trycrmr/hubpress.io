@@ -4,12 +4,16 @@
 :hp-tags: AWS, Jenkins, Testing, Automated Testing, Installation, Configuration
 //^
 
+CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in Jenkins Master on AWS>>:
+
 === Jenkins Master on AWS
 Configure your AWS account
 
 NOTE: I like to keep AWS from using the default for options when setting up my EC2s. It keeps me aware of the layout of my infrastructure without creating too much cruft.
 
-1. Configure a VPC with an Internet Gateway and a Public Subnet. Ensure your public subnet is configured to auto-assign IP addresses. It's optional but recommended to also create an Elastic IP to associated with you Jenkins instance. That way 
+[[anchor-1]]
+
+1. Configure a VPC with an Internet Gateway and a Public Subnet. Ensure your public subnet is configured to auto-assign IP addresses. It's optional but recommended to also create an Elastic IP to associate with your Jenkins EC2. That way 
 
 Install Jenkins
 
