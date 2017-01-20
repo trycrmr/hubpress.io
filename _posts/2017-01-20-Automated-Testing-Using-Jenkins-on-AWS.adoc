@@ -4,7 +4,7 @@
 :hp-tags: AWS, Jenkins, Testing, Automated Testing, Installation, Configuration
 //^
 
-CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in Jenkins Master on AWS>>:
+CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in the Jenkins Master on AWS section>>:
 
 === Jenkins Master on AWS
 Configure your AWS account
