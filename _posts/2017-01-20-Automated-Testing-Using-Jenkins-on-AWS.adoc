@@ -24,3 +24,9 @@ Install Amazon EC2 Plugin
 
 === Jenkins Master uses Agents to Process Pipelines on AWS
 Configure Amazon EC2 Plugin
+
+=== Build a Pipeline Using a Jenkinsfile
+
+=== Configure Jenkins to Trigger Pipelines from Github Activity
+
+=== Going Forward
