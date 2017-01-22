@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485110812547"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485110812547"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485110812547"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485111250199"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485111250199"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485111250199"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485110812547"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485111250199"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2017/01/20/Automated-Testing-Using-Jenkins-on-AWS.html" />
     <meta name="referrer" content="origin" />
@@ -235,7 +235,8 @@ I like to keep AWS from using the default for options when setting up my EC2s. I
 <p>Configure a Virtual Private Cloud with an Internet Gateway and a Public Subnet. Ensure your Public Subnet is configured to auto-assign IP addresses. It&#8217;s optional but recommended to also create an Elastic IP to associate with your Jenkins EC2 (either via Network Interface or directly with the EC2 instance).</p>
 </li>
 <li>
-<p>Create an EC2 instance within the infrastructure created in step #1. I used a <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">Centos 7 AMI entitled "CentOS 7 (x86_64) - with Updates HVM)"</a>.</p>
+<p>Create an EC2 instance within the infrastructure created in step #1. I used a <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">Centos 7 Amazon Machine Instance (AMI) entitled "CentOS 7 (x86_64) - with Updates HVM)"</a>. This AMI is free-tier eligible, and a t2.micro is large enough to run a Jenkins Master server. Obviously, scale up if need be.
+3.</p>
 </li>
 </ol>
 </div>
@@ -330,7 +331,7 @@ I like to keep AWS from using the default for options when setting up my EC2s. I
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485110812547"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485111250199"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
