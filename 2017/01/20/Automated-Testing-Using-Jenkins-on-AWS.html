@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485122828845"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485122828845"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485122828845"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485124684942"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485124684942"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485124684942"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485122828845"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485124684942"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2017/01/20/Automated-Testing-Using-Jenkins-on-AWS.html" />
     <meta name="referrer" content="origin" />
@@ -356,7 +356,19 @@ I will keep this brief by not attempting to describe Jenkins interface in too mu
 </div>
 <div class="sect4">
 <h5 id="_connect_to_your_amazon_ec2_via_a_jenkins_iam_role">Connect to your Amazon EC2 via a Jenkins IAM Role</h5>
-
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fortunately, the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin">Amazon EC2 plugin</a> has an "IAM setup" section. There, it provides the JSON to properly configure the Jenkins IAM Policy the Jenkins IAM Role would use. I added the iam:PassRole permission to my policy. TODO Find out if things work the same without the iam:PassRole permission in the policy.</p>
+</li>
+<li>
+<p>Navigate to your Identity and Access Management (IAM) section of your AWS account and create a Jenkins Policy using the JSON provided plus iam:PassRole.</p>
+</li>
+<li>
+<p>Create a Jenkins Role that uses the Jenkins Policy</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -437,7 +449,7 @@ I will keep this brief by not attempting to describe Jenkins interface in too mu
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485122828845"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485124684942"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
