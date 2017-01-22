@@ -18,7 +18,9 @@ NOTE: I like to keep AWS from using the default for options when setting up my E
 
 TIP: Note the key pair used to access the instance. We will use this key pair later to allow the Jenkins Master to access the agents. I named my key pair "jenkins" 'cause I'm creative like that :-) . 
 
-NOTE: The EC2 instance created in step #2 will be referred to as the "Jenkins Master" going forward. Technically, this makes sense because really all this server does is run the Jenkins Master process. 
+NOTE: The EC2 instance created in step #2 will be referred to as the "Jenkins Master" going forward. Technically, this makes sense because really all this server does is run the Jenkins Master process.
+
+CAUTION: Be sure the Route Table associated with your VPC has an entry for the Internet Gateway. This does not happen automatically when associating an Internet Gateway to a VPC.
 
 Install Jenkins
 
