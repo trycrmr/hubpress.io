@@ -41,6 +41,8 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword #To get the initial admin
 
 NOTE: Be sure a version of Jenkins greater than 2 (major version) installs. So 2.32.1-1.1 works. We will use Jenkins Plugins that require a Jenkins major version of greater than or equal to 2. 
 
+TIP: Jenkins provides a nice startup interface for installing plugins, but all these plugins can be installed from the Jenkin's Update Center. Since we don't need to install many plugins for this tutorial we will move past this, but it's useful to know what plugins are offered and what plugins are "suggested". 
+
 === Jenkins Master creates Agents on AWS
 Install Amazon EC2 Plugin
 
