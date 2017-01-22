@@ -13,7 +13,8 @@ NOTE: I like to keep AWS from using the default for options when setting up my E
 
 [[anchor-1]]
 
-1. Configure a VPC with an Internet Gateway and a Public Subnet. Ensure your public subnet is configured to auto-assign IP addresses. It's optional but recommended to also create an Elastic IP to associate with your Jenkins EC2. 
+1. Configure a Virtual Private Cloud with an Internet Gateway and a Public Subnet. Ensure your Public Subnet is configured to auto-assign IP addresses. It's optional but recommended to also create an Elastic IP to associate with your Jenkins EC2 (either via Network Interface or directly with the EC2 instance). 
+2. Create an EC2 instance within the infrastructure created in step #1. I used a https://aws.amazon.com/marketplace/pp/B00O7WM7QW[Centos 7 AMI entitled "CentOS 7 (x86_64) - with Updates HVM)"]. 
 
 Install Jenkins
 
