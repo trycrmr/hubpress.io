@@ -38,9 +38,9 @@
     <link href="//fonts.googleapis.com/" rel="dns-prefetch">
     <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485111250199"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485111250199"/>
-    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485111250199"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/main.min.css?v=1485113203354"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/custom.css?v=1485113203354"/>
+    <link rel="stylesheet" href="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1485113203354"/>
 
 
 
@@ -70,7 +70,7 @@
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485111250199"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/head-scripts.min.js?v=1485113203354"></script>
 
     <link rel="canonical" href="https://trycrmr.github.io/hubpress.io/2017/01/20/Automated-Testing-Using-Jenkins-on-AWS.html" />
     <meta name="referrer" content="origin" />
@@ -235,16 +235,44 @@ I like to keep AWS from using the default for options when setting up my EC2s. I
 <p>Configure a Virtual Private Cloud with an Internet Gateway and a Public Subnet. Ensure your Public Subnet is configured to auto-assign IP addresses. It&#8217;s optional but recommended to also create an Elastic IP to associate with your Jenkins EC2 (either via Network Interface or directly with the EC2 instance).</p>
 </li>
 <li>
-<p>Create an EC2 instance within the infrastructure created in step #1. I used a <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">Centos 7 Amazon Machine Instance (AMI) entitled "CentOS 7 (x86_64) - with Updates HVM)"</a>. This AMI is free-tier eligible, and a t2.micro is large enough to run a Jenkins Master server. Obviously, scale up if need be.
-3.</p>
+<p>Create an EC2 instance within the infrastructure created in step #1. I used a <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">Centos 7 Amazon Machine Instance (AMI) entitled "CentOS 7 (x86_64) - with Updates HVM)"</a>. This AMI is free-tier eligible, and a t2.micro is large enough to run a Jenkins Master server. Obviously, scale up if need be. No need to assign an IAM role to this server. TODO is storage actually required?</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Note the key pair used to access the instance. We will use this key pair later to allow the Jenkins Master to access the agents. I named my key pair "jenkins" 'cause I&#8217;m creative like that :-) .
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The EC2 instance created in step #2 will be referred to as the "Jenkins Master" going forward. Technically, this makes sense because really all this server does is run the Jenkins Master process.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Install Jenkins</p>
 </div>
-<div class="paragraph">
-<p>1.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log into the Jenkins Master EC2 instance using your jenkins key pair.
+2.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -331,7 +359,7 @@ I like to keep AWS from using the default for options when setting up my EC2s. I
         hljs.initHighlightingOnLoad();
       </script>
 
-    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485111250199"></script>
+    <script src="//trycrmr.github.io/hubpress.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1485113203354"></script>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
