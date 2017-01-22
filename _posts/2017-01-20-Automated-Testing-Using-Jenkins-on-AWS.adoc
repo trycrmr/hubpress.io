@@ -51,7 +51,9 @@ NOTE: I will keep this brief by not attempting to describe Jenkins interface in 
 2. Navigate to "Manage Jenkins" > "Configure System". The Amazon EC2 plugin added a "Cloud" section. Click "Add a new cloud" > "Amazon EC2". Several configuration settings will appear; Basically now we populate these settings! 
 
 ===== Connect to your Amazon EC2 via a Jenkins IAM Role
-
+1. Fortunately, the https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin[Amazon EC2 plugin] has an "IAM setup" section. There, it provides the JSON to properly configure the Jenkins IAM Policy the Jenkins IAM Role would use. I added the iam:PassRole permission to my policy. TODO Find out if things work the same without the iam:PassRole permission in the policy. 
+2. Navigate to your Identity and Access Management (IAM) section of your AWS account and create a Jenkins Policy using the JSON provided plus iam:PassRole. 
+3. Create a Jenkins Role that uses the Jenkins Policy
 
 === Jenkins Master uses Agents to Process Pipelines on AWS
 Configure Amazon EC2 Plugin
