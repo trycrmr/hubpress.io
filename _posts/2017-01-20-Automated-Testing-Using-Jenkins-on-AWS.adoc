@@ -23,7 +23,7 @@ NOTE: The EC2 instance created in step #2 will be referred to as the "Jenkins Ma
 Install Jenkins
 
 1. Log into the Jenkins Master EC2 instance using your jenkins key pair.
-2. 
+2. Follow the instructions to https://jenkins.io/download/[install Jenkins]. If using the same Centos 7 AMI I did, https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions[Red Hat Distributions Install instructions here].
 
 === Jenkins Master creates Agents on AWS
 Install Amazon EC2 Plugin
