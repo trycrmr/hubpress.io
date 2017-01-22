@@ -7,7 +7,8 @@
 CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in the Jenkins Master on AWS section>>:
 
 === Jenkins Master on AWS
-Configure your AWS account
+
+===== Configure your AWS account
 
 NOTE: I like to keep AWS from using the default for options when setting up my EC2s. It keeps me aware of the layout of my infrastructure without creating too much cruft.
 
@@ -22,7 +23,7 @@ NOTE: The EC2 instance created in step #2 will be referred to as the "Jenkins Ma
 
 CAUTION: Be sure the Route Table associated with your VPC has an entry for the Internet Gateway. This does not happen automatically when associating an Internet Gateway to a VPC.
 
-Install Jenkins
+===== Install Jenkins
 
 1. Log into the Jenkins Master EC2 instance using your jenkins key pair.
 2. Follow the instructions to https://jenkins.io/download/[install Jenkins]. If using the same Centos 7 AMI I did, https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions[Red Hat Distributions Install instructions here].
