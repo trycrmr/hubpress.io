@@ -4,7 +4,7 @@
 :hp-tags: AWS, Jenkins, Testing, Automated Testing, Installation, Configuration
 //^
 
-CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in the Jenkins Master on AWS section>>:
+CAUTION: The following assumptions are made: You are familiar with Amazon Web Services enough to understand <<anchor-1, the first step in the Jenkins Master on AWS section>>.
 
 === Jenkins Master on AWS
 
@@ -44,7 +44,14 @@ NOTE: Be sure a version of Jenkins greater than 2 (major version) installs. So 2
 TIP: Jenkins provides a nice startup interface for installing plugins, but all these plugins can be installed from the Jenkin's Update Center. Since we don't need to install many plugins for this tutorial we will move past this (click the X in the top right), but it's useful to know what plugins are offered and what plugins are "suggested". 
 
 === Jenkins Master creates Agents on AWS
-Install Amazon EC2 Plugin
+===== Install the Amazon EC2 Plugin
+NOTE: I will keep this brief by not attempting to describe Jenkins interface in too much detail. That being said, use the second bar from the top (not the first black one, but the light blue one below that) to orient yourself; It will dynamically populate as you navigate through Jenkins.
+
+1. From the home screen go to "Manage Jenkins" > "Manage Plugins". Install the https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin[Amazon EC2 plugin]. It's dependencies will install with it. 
+2. Navigate to "Manage Jenkins" > "Configure System". The Amazon EC2 plugin added a "Cloud" section. Click "Add a new cloud" > "Amazon EC2". Several configuration settings will appear; Basically now we populate these settings! 
+
+===== Connect to your Amazon EC2 via a Jenkins IAM Role
+
 
 === Jenkins Master uses Agents to Process Pipelines on AWS
 Configure Amazon EC2 Plugin
