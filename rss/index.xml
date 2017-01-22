@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 22 Jan 2017 22:07:08 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Sun, 22 Jan 2017 22:38:04 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -158,7 +158,19 @@ I will keep this brief by not attempting to describe Jenkins interface in too mu
 </div>
 <div class="sect4">
 <h5 id="_connect_to_your_amazon_ec2_via_a_jenkins_iam_role">Connect to your Amazon EC2 via a Jenkins IAM Role</h5>
-
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fortunately, the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin">Amazon EC2 plugin</a> has an "IAM setup" section. There, it provides the JSON to properly configure the Jenkins IAM Policy the Jenkins IAM Role would use. I added the iam:PassRole permission to my policy. TODO Find out if things work the same without the iam:PassRole permission in the policy.</p>
+</li>
+<li>
+<p>Navigate to your Identity and Access Management (IAM) section of your AWS account and create a Jenkins Policy using the JSON provided plus iam:PassRole.</p>
+</li>
+<li>
+<p>Create a Jenkins Role that uses the Jenkins Policy</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
