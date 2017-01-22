@@ -27,13 +27,15 @@ Install Jenkins
 1. Log into the Jenkins Master EC2 instance using your jenkins key pair.
 2. Follow the instructions to https://jenkins.io/download/[install Jenkins]. If using the same Centos 7 AMI I did, https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions[Red Hat Distributions Install instructions here].
 
-For me, installing Jenkins (latest LTS) boiled down to these four commands, then logging in using the password :
+For me, installing Jenkins (latest LTS) boiled down to these commands, then logging in using the password when first visiting Jenkins Master at port 8080:
 ----
 sudo yum install java
 sudo yum install wget
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum install jenkins
+sudo jenkins service start
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword #To get the initial admin password
 ----
 
 NOTE: Be sure a version of Jenkins greater than 2 (major version) installs. So 2.32.1-1.1 works. We will use Jenkins Plugins that require a Jenkins major version of greater than or equal to 2. 
