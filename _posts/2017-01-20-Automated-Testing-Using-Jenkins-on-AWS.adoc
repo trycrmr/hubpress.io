@@ -14,12 +14,16 @@ NOTE: I like to keep AWS from using the default for options when setting up my E
 [[anchor-1]]
 
 1. Configure a Virtual Private Cloud with an Internet Gateway and a Public Subnet. Ensure your Public Subnet is configured to auto-assign IP addresses. It's optional but recommended to also create an Elastic IP to associate with your Jenkins EC2 (either via Network Interface or directly with the EC2 instance). 
-2. Create an EC2 instance within the infrastructure created in step #1. I used a https://aws.amazon.com/marketplace/pp/B00O7WM7QW[Centos 7 Amazon Machine Instance (AMI) entitled "CentOS 7 (x86_64) - with Updates HVM)"]. This AMI is free-tier eligible, and a t2.micro is large enough to run a Jenkins Master server. Obviously, scale up if need be.
-3. 
+2. Create an EC2 instance within the infrastructure created in step #1. I used a https://aws.amazon.com/marketplace/pp/B00O7WM7QW[Centos 7 Amazon Machine Instance (AMI) entitled "CentOS 7 (x86_64) - with Updates HVM)"]. This AMI is free-tier eligible, and a t2.micro is large enough to run a Jenkins Master server. Obviously, scale up if need be. No need to assign an IAM role to this server. TODO is storage actually required?
+
+TIP: Note the key pair used to access the instance. We will use this key pair later to allow the Jenkins Master to access the agents. I named my key pair "jenkins" 'cause I'm creative like that :-) . 
+
+NOTE: The EC2 instance created in step #2 will be referred to as the "Jenkins Master" going forward. Technically, this makes sense because really all this server does is run the Jenkins Master process. 
 
 Install Jenkins
 
-1. 
+1. Log into the Jenkins Master EC2 instance using your jenkins key pair.
+2. 
 
 === Jenkins Master creates Agents on AWS
 Install Amazon EC2 Plugin
