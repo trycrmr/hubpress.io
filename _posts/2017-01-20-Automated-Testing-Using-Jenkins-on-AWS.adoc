@@ -44,14 +44,14 @@ NOTE: Be sure a version of Jenkins greater than 2 (major version) installs. So 2
 TIP: Jenkins provides a nice startup interface for installing plugins, but all these plugins can be installed from the Jenkin's Update Center. Since we don't need to install many plugins for this tutorial we will move past this (click the X in the top right), but it's useful to know what plugins are offered and what plugins are "suggested". 
 
 === Jenkins Master creates Agents on AWS
-===== Install the Amazon EC2 Plugin
+===== Install and Configure the Amazon EC2 Plugin
 NOTE: I will keep this brief by not attempting to describe Jenkins interface in too much detail. That being said, use the second bar from the top (not the first black one, but the light blue one below that) to orient yourself; It will dynamically populate as you navigate through Jenkins.
 
 1. From the home screen go to "Manage Jenkins" > "Manage Plugins". Install the https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin[Amazon EC2 plugin]. It's dependencies will install with it. 
 2. Navigate to "Manage Jenkins" > "Configure System". The Amazon EC2 plugin added a "Cloud" section. Click "Add a new cloud" > "Amazon EC2". Several configuration settings will appear; Basically now we populate these settings! 
-3. Follow the instructions below to <<anchor-2, Connect to your Amazon EC2 via a Jenkins IAM Role>>
+3. Follow the instructions below to <<anchor-2,Connect to your Amazon EC2 via a Jenkins IAM Role>>
 4. Click the "Add" button next to AMIs setting. This will give us some AMI settings to populate.
-5. Choose an AMI to use. I'm using LINK. Populate corresponding settings about the AMI and how you would like it spun up. These settings include: AMI ID, Instance Type, EBS Optimized, Availability Zone, Security Group Names, AMI Type, and Use Spot Instance. For me, I opted for the same instance type for my Build Agents as my Jenkins Master,  https://aws.amazon.com/marketplace/pp/B00O7WM7QW[a Centos 7 (AMI) called "CentOS 7 (x86_64) - with Updates HVM)"].
+5. Choose an AMI to use. Populate corresponding settings about the AMI and how you would like it spun up. These settings include: AMI ID, Instance Type, EBS Optimized, Availability Zone, Security Group Names, AMI Type, and Use Spot Instance. For me, I opted for the same instance type for my Build Agents as my Jenkins Master,  https://aws.amazon.com/marketplace/pp/B00O7WM7QW[a Centos 7 (AMI) called "CentOS 7 (x86_64) - with Updates HVM)"].
 6. For remote user, check what the default user is one should log in with when SSHing into the AMI. For me, it's "centos". TODO does Remote FS Root & Root command prefix & Remote SSH port & Labels matter?
 7. Use the Init Script setting to configure the AMI you choose to handle Jenkins, adjust security as necessary, and add the RSA public key to the authorized key file on the server. This last step will allow the Jenkins Master to log into the Build Agent spun up as needed. Since the AMI I chose was very bare bones my Init Script looked like this:
 
@@ -68,7 +68,9 @@ sudo yum install scp --assumeyes
 sudo yum install java-1.8.0-openjdk --assumeyes
 sudo yum install git --assumeyes
 
-8.Note the "Advanced" button on the far-right at the bottom of the AMI settings. This button can be difficult to see depending on how the settings populate. Click it to see some additional AMI configurations. I set the "Number of Executors" and "Instance Cap" to 1 to keep several pipelines from running at once on a Build Agent and restrict Jenkins from spinning up several Build Agents to process jobs, added the Subnet ID for my VPC, added my ARN for my IAM instance profile, and checked "Connect By SSH Process.
+8.Note the "Advanced" button on the far-right at the bottom of the AMI settings. This button can be difficult to see depending on how the settings populate. Click it to see some additional AMI configurations. I set the "Number of Executors" and "Instance Cap" to 1 to keep several pipelines from running at once on a Build Agent and restrict Jenkins from spinning up several Build Agents to process jobs, added the Subnet ID for my VPC, added my ARN for my IAM instance profile, and checked "Connect By SSH Process".
+9.Now you are ready to test that <<anchor-3,Jenkins Master creates Build Agents using EC2s as needed>>.
+
 
 [[anchor-2]]
 
@@ -80,6 +82,13 @@ sudo yum install git --assumeyes
 5. Copy the private key pair (my "jenkins" key pair) into the "EC2 Key Pair's Private Key" setting.
 6. Select a Region to use. It has to be a Region the key pair from step #5 is registered to.
 7. Click "Test Connection". It should say "Success" in small black text or display an error in bold red text. 
+
+[[anchor-3]]
+
+===== Test Jenkins Master Creates Build Agents Using EC2s As Needed
+1. On the Jenkins Homepage, navigate to "New Item".
+2. You will be asked to create a name for this item, then select what type of item it is. In my case at this point I can only select "Freestyle Project" and press "OK".
+3. 
 
 === Jenkins Master uses Agents to Process Pipelines on AWS
 Configure Amazon EC2 Plugin
