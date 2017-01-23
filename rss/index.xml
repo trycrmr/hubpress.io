@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 23 Jan 2017 20:15:10 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 23 Jan 2017 20:47:02 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -132,7 +132,7 @@ Jenkins provides a nice startup interface for installing plugins, but all these 
 <div class="sect2">
 <h3 id="_jenkins_master_creates_agents_on_aws">Jenkins Master creates Agents on AWS</h3>
 <div class="sect4">
-<h5 id="_install_the_amazon_ec2_plugin">Install the Amazon EC2 Plugin</h5>
+<h5 id="_install_and_configure_the_amazon_ec2_plugin">Install and Configure the Amazon EC2 Plugin</h5>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -160,7 +160,7 @@ I will keep this brief by not attempting to describe Jenkins interface in too mu
 <p>Click the "Add" button next to AMIs setting. This will give us some AMI settings to populate.</p>
 </li>
 <li>
-<p>Choose an AMI to use. I&#8217;m using LINK. Populate corresponding settings about the AMI and how you would like it spun up. These settings include: AMI ID, Instance Type, EBS Optimized, Availability Zone, Security Group Names, AMI Type, and Use Spot Instance. For me, I opted for the same instance type for my Build Agents as my Jenkins Master,  <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">a Centos 7 (AMI) called "CentOS 7 (x86_64) - with Updates HVM)"</a>.</p>
+<p>Choose an AMI to use. Populate corresponding settings about the AMI and how you would like it spun up. These settings include: AMI ID, Instance Type, EBS Optimized, Availability Zone, Security Group Names, AMI Type, and Use Spot Instance. For me, I opted for the same instance type for my Build Agents as my Jenkins Master,  <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">a Centos 7 (AMI) called "CentOS 7 (x86_64) - with Updates HVM)"</a>.</p>
 </li>
 <li>
 <p>For remote user, check what the default user is one should log in with when SSHing into the AMI. For me, it&#8217;s "centos". TODO does Remote FS Root &amp; Root command prefix &amp; Remote SSH port &amp; Labels matter?</p>
@@ -186,7 +186,8 @@ sudo yum install git --assumeyes</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>8.Note the "Advanced" button on the far-right at the bottom of the AMI settings. This button can be difficult to see depending on how the settings populate. Click it to see some additional AMI configurations. I set the "Number of Executors" and "Instance Cap" to 1 to keep several pipelines from running at once on a Build Agent and restrict Jenkins from spinning up several Build Agents to process jobs, added the Subnet ID for my VPC, added my ARN for my IAM instance profile, and checked "Connect By SSH Process.</p>
+<p>8.Note the "Advanced" button on the far-right at the bottom of the AMI settings. This button can be difficult to see depending on how the settings populate. Click it to see some additional AMI configurations. I set the "Number of Executors" and "Instance Cap" to 1 to keep several pipelines from running at once on a Build Agent and restrict Jenkins from spinning up several Build Agents to process jobs, added the Subnet ID for my VPC, added my ARN for my IAM instance profile, and checked "Connect By SSH Process".
+9.Now you are ready to test that <a href="#anchor-3">Jenkins Master creates Build Agents using EC2s as needed</a>.</p>
 </div>
 </div>
 <div class="sect4">
@@ -213,6 +214,20 @@ sudo yum install git --assumeyes</code></pre>
 </li>
 <li>
 <p>Click "Test Connection". It should say "Success" in small black text or display an error in bold red text.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="anchor-3">Test Jenkins Master Creates Build Agents Using EC2s As Needed</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the Jenkins Homepage, navigate to "New Item".</p>
+</li>
+<li>
+<p>You will be asked to create a name for this item, then select what type of item it is. In my case at this point I can only select "Freestyle Project" and press "OK".
+3.</p>
 </li>
 </ol>
 </div>
