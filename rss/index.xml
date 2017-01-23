@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 23 Jan 2017 19:03:29 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 23 Jan 2017 19:14:34 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -170,7 +170,16 @@ I will keep this brief by not attempting to describe Jenkins interface in too mu
 <p>Create a Jenkins Role that uses the Jenkins Policy. Save the following details when they are made available to you: "Access Key ID", "Secret Access Key", and "IAM Role to Use" (an Amazon Resource Name (i.e. ARN, example: "arn:aws:iam::123456789012:role/MyIAMRoleName") )</p>
 </li>
 <li>
-<p>Once you have these details navigate back to Jenkins &gt; Manage Jenkins &gt; Configure System, Cloud section. For the "Amazon EC2 Credentials" setting click the "Add" dropdown and select "Amazon EC2". A popup will appear with credential configuration settings. For "Kind" select "AWS Credentials". Populate the "Access Key ID", "Secret Access Key", and "IAM Role To Use". "IAM Role To Use" needs to be an ARN. Then complete the form by clicking "Add"; Not having all the fields filled out does not cause an issue.</p>
+<p>Once you have these details navigate back to Jenkins &gt; Manage Jenkins &gt; Configure System, Cloud section. For the "Amazon EC2 Credentials" setting click the "Add" dropdown and select "Amazon EC2". A popup will appear with credential configuration settings. For "Kind" select "AWS Credentials". Populate the "Access Key ID", "Secret Access Key", and "IAM Role To Use". "IAM Role To Use" needs to be an ARN. Then complete the form by clicking "Add"; Not having all the fields filled out does not cause an issue. TODO might not need the "IAM Role To Use" ARN if Jenkins user already exists.</p>
+</li>
+<li>
+<p>Copy the private key pair (my "jenkins" key pair) into the "EC2 Key Pair&#8217;s Private Key" setting.</p>
+</li>
+<li>
+<p>Select a Region to use. It has to be a Region the key pair from step #5 is registered to.</p>
+</li>
+<li>
+<p>Click "Test Connection". It should say "Success" in small black text or display an error in bold red text.</p>
 </li>
 </ol>
 </div>
