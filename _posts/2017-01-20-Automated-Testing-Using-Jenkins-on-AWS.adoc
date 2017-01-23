@@ -50,8 +50,25 @@ NOTE: I will keep this brief by not attempting to describe Jenkins interface in 
 1. From the home screen go to "Manage Jenkins" > "Manage Plugins". Install the https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin[Amazon EC2 plugin]. It's dependencies will install with it. 
 2. Navigate to "Manage Jenkins" > "Configure System". The Amazon EC2 plugin added a "Cloud" section. Click "Add a new cloud" > "Amazon EC2". Several configuration settings will appear; Basically now we populate these settings! 
 3. Follow the instructions below to <<anchor-2, Connect to your Amazon EC2 via a Jenkins IAM Role>>
-4. 
+4. Click the "Add" button next to AMIs setting. This will give us some AMI settings to populate.
+5. Choose an AMI to use. I'm using LINK. Populate corresponding settings about the AMI and how you would like it spun up. These settings include: AMI ID, Instance Type, EBS Optimized, Availability Zone, Security Group Names, AMI Type, and Use Spot Instance. For me, I opted for the same instance type for my Build Agents as my Jenkins Master,  https://aws.amazon.com/marketplace/pp/B00O7WM7QW[a Centos 7 (AMI) called "CentOS 7 (x86_64) - with Updates HVM)"].
+6. For remote user, check what the default user is one should log in with when SSHing into the AMI. For me, it's "centos". TODO does Remote FS Root & Root command prefix & Remote SSH port & Labels matter?
+7. Use the Init Script setting to configure the AMI you choose to handle Jenkins, adjust security as necessary, and add the RSA public key to the authorized key file on the server. This last step will allow the Jenkins Master to log into the Build Agent spun up as needed. Since the AMI I chose was very bare bones my Init Script looked like this:
 
+[source, bash]
+--- 
+echo "=== 0 of 2 | Jenkins Master Init Script ==="
+echo "=== 1 of 2 | Configuring Build Agent ==="
+jenkinsRSApub="[Your key pair's public key without brackets in quotes]"
+echo $jenkinsRSApub >> /home/centos/.ssh/authorized_keys
+setenforce 0
+echo "=== 2 of 2 | Installing Required Software ==="
+sudo yum update --assumeyes
+sudo yum install wget --assumeyes
+sudo yum install scp --assumeyes
+sudo yum install java-1.8.0-openjdk --assumeyes
+sudo yum install git --assumeyes
+---
 
 [[anchor-2]]
 
