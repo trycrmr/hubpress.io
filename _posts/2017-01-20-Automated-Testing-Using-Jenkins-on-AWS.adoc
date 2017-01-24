@@ -98,3 +98,6 @@ Configure Amazon EC2 Plugin
 === Configure Jenkins to Trigger Pipelines from Github Activity
 
 === Going Forward
+TODO:
+.build agents for specific repos
+.Automatically kick off build when PR is opened into master
