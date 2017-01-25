@@ -47,6 +47,8 @@ TIP: Jenkins provides a nice startup interface for installing plugins, but all t
 ===== Install and Configure the Amazon EC2 Plugin
 NOTE: I will keep this brief by not attempting to describe Jenkins interface in too much detail. That being said, use the second bar from the top (not the first black one, but the light blue one below that) to orient yourself; It will dynamically populate as you navigate through Jenkins.
 
+TIP: Prudent to set up an identifiable Jenkins user with the same priviledges as admin for traceability purposes on who did what instead of doing everything as admin. Create your new user through "Manage Jenkins" > "Manage Users" and ensure your user has admin privileges in "Manage Jenkins" > "Configure Global Security".
+
 1. From the home screen go to "Manage Jenkins" > "Manage Plugins". Install the https://wiki.jenkins-ci.org/display/JENKINS/Amazon+EC2+Plugin[Amazon EC2 plugin]. It's dependencies will install with it. 
 2. Navigate to "Manage Jenkins" > "Configure System". The Amazon EC2 plugin added a "Cloud" section. Click "Add a new cloud" > "Amazon EC2". Several configuration settings will appear; Basically now we populate these settings! 
 3. Follow the instructions below to <<anchor-2,Connect to your Amazon EC2 via a Jenkins IAM Role>>
