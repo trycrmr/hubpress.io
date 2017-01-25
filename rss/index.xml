@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Tue, 24 Jan 2017 15:33:23 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[There and back again]]></title><description><![CDATA[There and back again]]></description><link>https://trycrmr.github.io/hubpress.io</link><image><url>https://aboutme.imgix.net/background/users/t/e/r/terencecreamer_1473115180_14.jpg</url><title>There and back again</title><link>https://trycrmr.github.io/hubpress.io</link></image><generator>RSS for Node</generator><lastBuildDate>Wed, 25 Jan 2017 18:57:27 GMT</lastBuildDate><atom:link href="https://trycrmr.github.io/hubpress.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Automated Testing Using Jenkins on AWS]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -99,7 +99,7 @@ sudo yum install wget
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum install jenkins
-sudo jenkins service start
+sudo service jenkins start
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword #To get the initial admin password</pre>
 </div>
 </div>
