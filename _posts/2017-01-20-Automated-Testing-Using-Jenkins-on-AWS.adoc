@@ -67,7 +67,7 @@ echo "=== 2 of 2 | Installing Required Software ==="
 sudo yum update --assumeyes
 sudo yum install wget --assumeyes
 sudo yum install scp --assumeyes
-sudo yum install java-1.8.0-openjdk --assumeyes
+sudo yum install java-1.8.0-openjdk --assumeyes ###java instead of java-1.8.0
 sudo yum install git --assumeyes
 
 8.Note the "Advanced" button on the far-right at the bottom of the AMI settings. This button can be difficult to see depending on how the settings populate. Click it to see some additional AMI configurations. I set the "Number of Executors" and "Instance Cap" to 1 to keep several pipelines from running at once on a Build Agent and restrict Jenkins from spinning up several Build Agents to process jobs, added the Subnet ID for my VPC, added my ARN for my IAM instance profile, and checked "Connect By SSH Process".
